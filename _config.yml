@@ -1,21 +1,26 @@
 # Dependencies
-markdown:         redcarpet
+markdown:         kramdown
 highlighter:      pygments
 
 # Permalinks
 permalink:        pretty
-relative_permalinks: true
+relative_permalinks: false
 
 # Setup
-title:            Hyde
+title:            Martin Jedwabny
 tagline:          'A Jekyll theme'
-description:      'A brazen two-column <a href="http://jekyllrb.com" target="_blank">Jekyll</a> theme that pairs a prominent sidebar with uncomplicated content. Made by <a href="https://twitter.com/mdo" target="_blank">@mdo</a>.'
-url:              http://hyde.getpoole.com
+description:      'A blog about my interests and research as a PhD. student.'
+url:              http://martinjedwabny.github.io
 baseurl:          /
 
 author:
-  name:           'Mark Otto'
-  url:            https://twitter.com/mdo
+  name:           'Martin Jedwabny'
+  url:            http://martinjedwabny.github.io
+
+plugins:
+  - jekyll-paginate
+  - jekyll-gist
+  - jekyll/scholar
 
 paginate:         5
 
@@ -23,4 +28,29 @@ paginate:         5
 version:          2.1.0
 
 github:
-  repo:           https://github.com/poole/hyde
+  repo:           https://github.com/martinjedwabny
+
+scholar:
+  style: apa
+  locale: en
+
+  sort_by: none
+  order: ascending
+
+  group_by: none
+  group_order: ascending
+
+  source: ./_bibliography
+  bibliography: references.bib
+  bibliography_template: ""
+
+  replace_strings: true
+  join_strings:    true
+
+  use_raw_bibtex_entry: false
+
+  details_dir:    bibliography
+  details_layout: bibtex.html
+  details_link:   Details
+
+  query: "@*"

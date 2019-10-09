@@ -1,0 +1,14 @@
+
+@media print {
+    .sidebar, .pagination {
+      display: none !important;
+    }
+  }
+  
+  .sidebar-img {
+    height: 100px;
+  }
+
+  .sidebar h1 {
+    font-size: 24px;
+  }
