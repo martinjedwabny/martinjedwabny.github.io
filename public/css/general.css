@@ -1,7 +1,15 @@
 
 @media print {
-    .sidebar, .pagination {
+    .sidebar, .pagination, .related {
       display: none !important;
+    }
+    html {
+      font-size: 12px;
+    }
+    .content {
+      margin: 0px;
+      padding: 24px;
+      max-width: 100%;
     }
   }
   
