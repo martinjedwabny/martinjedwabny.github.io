@@ -27,3 +27,16 @@
   padding: 10px;
   width: 90%;
 }
+
+/* Custom */
+.theme-base-mj .sidebar {
+  background-color: #3e8c5a;
+}
+.theme-base-mj .content a,
+.theme-base-mj .related-posts li a:hover {
+  color: #33aa5e;
+}
+
+.theme-base-mj .content h1 a {
+  color: #303030;
+}
