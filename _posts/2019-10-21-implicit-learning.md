@@ -2,12 +2,14 @@
 layout: post
 title: Implicitly Learning to Reason in First-Order Logic
 tags: [Logic, Learning, Query answering]
-published: false
+published: true
 ---
 
-This paper {% cite implicit-learning-2019 %} considers the problem of answering queries about first order logic (FOL) formulas based on background knowledge partially represented explicitly as other formulas, and partially represented as examples independently drawn from a fixed probability distribution.
+This paper {% cite implicit-learning-2019 %} considers the problem of answering queries about infinitary first order logic (infinite but countable amount of constants) formulas based on background knowledge partially represented explicitly as other formulas, and partially represented as examples independently drawn from a fixed probability distribution.
 
 <!--more-->
+
+The authors present an algorithm that reduces reasoning with implicit learning to deciding entailment. Meaning it does not learn rules, but it can answer queries (i.e. resolve entailment) with implicit and explicit learning. They also provide theoretical guarantees if the implicit knowledge is drawn from a probability distribution.
 
 Idea
 ---
@@ -43,15 +45,27 @@ A **model** of a KB is a consistent mapping from all possible grounded atoms to 
 
 Let $$N$$ be a partial model of the KB, a ground formula is **witnessed** to be true iff it is true in $$N$$. Next, a $$\forall$$-clause $$\forall \hat x \theta(\hat x)$$ is witnessed true in a partial model $$N$$ for the set of constants $$C$$ if for every binding of $$\hat x$$ to constants $$\hat c \in C$$, the resulting ground clause $$\theta(\hat c)$$ is witnessed true in $$N$$.
 
-<!-- Given a distribution $$D$$ over all possible models of KB, a masking process $$\Theta$$ is a function that maps a distribution over the models of KB, to a distribution over partial models of KB, i.e. $$\Theta (D)$$ is a distribution over partial models of KB. -->
+Given a distribution $$D$$ over all possible models of KB, a masking process $$\Theta$$ is a function that maps a distribution over the models of KB, to a distribution over partial models of KB, i.e. $$\Theta (D)$$ is a distribution over partial models of KB.
 
+Then, given:
+- An *explicit* KB (given as input, not inferred from examples).
+- A set of partial models $$\{ N^{(1)} , ... ,  N^{(m)} \}$$ (sets of possible true grounded atoms) that represent witnessed examples, i.e. sets of grounded atoms that hold together in an example. They would represent the *implicit* knowledge.
+- A distribution $$D$$ of $$\{ N^{(1)} , ... ,  N^{(m)} \}$$ masked by a masking process $$\Theta$$.
+- A query (grounded formula) $$\alpha$$.
+- A number $$k$$ of constants at least as large as the KB's rank. 
 
-How
----
+The authors present the following algorithm to estimate the probability $$\hat p$$ of the query being right:
 
+![useful image]({{ site.url }}/public/img/implicit-learning/1.png)
 
-<!-- img -->
-<!-- ![useful image]({{ site.url }}/public/img/gnn/6.png) -->
+The guarantees of this procedure are given by the theorem:
+
+![useful image]({{ site.url }}/public/img/implicit-learning/2.png)
+
+Where given a distribution $$D$$ over $$\{ N^{(1)} , ... ,  N^{(m)} \}$$, a query $$\alpha$$ is $$p$$-valid iff: 
+
+$$\sum\limits_{ \{ N^{(i)} \ \mid \ N^{(i)} \models \alpha \} }Pr(N^{(i)})) \geq p$$.
+
 
 References
 ---
