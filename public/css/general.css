@@ -10,7 +10,10 @@
       margin: 0px;
       padding: 24px;
       max-width: 100%;
-    }
+		}
+		.post-tag{
+			display: none !important;
+		}
   }
   
   .sidebar-img {

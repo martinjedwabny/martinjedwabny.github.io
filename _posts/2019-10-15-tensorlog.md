@@ -1,6 +1,7 @@
 ---
 layout: post
 title: Tensorlog
+tags: [Logic, Learning, Query answering, Neural-Symbolic]
 ---
 
 TensorLog {% cite cohenYM17 %} is an implementation of probabilistic knowledge bases that (i) leverages deep learning to answer queries efficiently, by (ii) restricting the first order logic language to a class called p-tree-DKG, and (iii) learns weights on knowledge base facts.
