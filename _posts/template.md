@@ -7,7 +7,7 @@ published: false
 
 This paper {% cite implicit-learning-2019 %} describes X.
 
-<!-- more -->
+<!--more-->
 
 Idea
 ---
