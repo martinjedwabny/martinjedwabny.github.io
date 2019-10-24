@@ -45,28 +45,32 @@ $$ P(X_1, ... , X_n) = \prod\limits_{i=1}^{n} P(X_i | C(X_i)) $$
 
 A **markov network**, on the other hand, captures bidirectional dependency, which suits different kinds of problems (e.g. a grid of pixels). 
 
-Formally, a markov network is an undirected graph $$G=(V,E)$$ where $$V$$ is a set of random variables and there is an edge $$(X_i,X_j) \in E$$ iff random variables $$X_j$$ and $$X_i$$ depend on each other.
+Formally, a markov network is an undirected graph $$G=(V,E)$$ where $$V$$ is a set of random variables and there is an edge $$(X_i,X_j) \in E$$ iff random variables $$X_j$$ and $$X_i$$ depend on each other. 
+
+Meaning, any variable is conditionally independent from all others given its neightbors.
 
 Now, because of the *Hammersley–Clifford theorem*, any probability distribution that has strictly positive density can be decomposed as a markov network $$G$$ and *potential functions* $$\phi_{C \in \operatorname{cliques}(G)} : X_C \mapsto \mathbb{R}_{\geq 0}$$ such that:
 
-$$ P(X=x) = \frac{\prod\limits_{C \in \operatorname{cliques}(G)} \phi_C (X_C = x_C)}{\sum\limits_{x'} \prod\limits_{C \in \operatorname{cliques}(G)} \phi_C (X_C = x_C)} $$
+$$ P(X=x) = \frac{\prod\limits_{C \in \operatorname{cliques}(G)} \phi_C (C = x_C)}{\sum\limits_{x'} \prod\limits_{C \in \operatorname{cliques}(G)} \phi_C (C = x_C)} $$
 
 Where $$x_C$$ is $$x$$ restricted to the random variables that are included in the clique $$C$$.
+
+![useful image]({{ site.url }}/public/img/bay-markov/2.png)
 
 Any distribution with strictly positive density can also be decomposed in **exponential form** as:
 
 $$ P(X=x) = \frac{ \exp \left( \sum\limits_{j=1}^{K} w_j f_j (x) \right) }{ \sum\limits_{x'} \exp \left( \sum\limits_{j=1}^{K} w_j f_j (x') \right) } $$
 
-Where the features $$f_j$$ can be binary i.e. $$f_j(x) \in \{0,1 \}$$.
+Where the features $$f_j$$ can be binary i.e. $$f_j(x) \in \{0,1 \}$$ and $$exp(a) = e^a$$.
 
 In the most direct translation, there is one feature corresponding to each possible state of each clique. This representation is exponential in the size of the cliques.
 
 However, we are free to specify a much smaller number of features (e.g., logical functions of the state of the clique) at the cost of lower representation domain i.e. we can fix $$K$$ to a much lower number. This allows for a more compact representation than the potential-function form.
 
 A distribution $$P$$ is a **log linear model** over a Markov network $$G$$ if it is associated with:
-- A set of features $$\{ f_1(D_1) , ... , f_m(D_m) \}$$ where each $$D_i$$ is a complete subgraph of $$G$$ and $$f$$ takes value 1 for some values $$y \in Val(D)$$ (note: we can have several features over the same scope).
+- A set of features $$\{ f_1(D_1) , ... , f_m(D_m) \}$$ where each $$D_i$$ is a clique of $$G$$ and $$f$$ takes value 1 for some values $$y \in Val(D)$$ i.e. a condition. **Note**: we can have several features over the same clique.
 - A set of weights $$w_1,...,w_m$$ such that:
 
-$$ P(x_1,...,x_n) = \frac{ \exp \left( \sum\limits_{j=1}^{m} w_j f_j (x \mid_{D_j}) \right) }{ \sum\limits_{x'} \exp \left( \sum\limits_{j=1}^{m} w_j f_j (x' \mid_{D_j}) \right) } $$
+$$ P(X=x) = \frac{ \exp \left( \sum\limits_{j=1}^{m} w_j f_j (x \mid_{D_j}) \right) }{ \sum\limits_{x'} \exp \left( \sum\limits_{j=1}^{m} w_j f_j (x' \mid_{D_j}) \right) } $$
 
 Where $$x \mid_{D_j}$$ is the vector $$x$$ restricted to the variables present in $$D_j$$.
