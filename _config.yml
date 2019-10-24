@@ -8,7 +8,7 @@ relative_permalinks: false
 
 # Setup
 title:            Martin Jedwabny
-tagline:          'A Jekyll theme'
+tagline:          'A blog about my interests and research as a PhD. student.'
 description:      'A blog about my interests and research as a PhD. student.'
 url:              https://martinjedwabny.github.io
 baseurl:          /
