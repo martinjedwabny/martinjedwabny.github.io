@@ -19,13 +19,24 @@
 		}
   }
   
-  .sidebar-img {
-    height: 100px;
-  }
+.sidebar-img {
+height: 140px;
+border-radius: 50%;
+overflow:hidden;
+object-fit: cover;
+}
 
-  .sidebar h1 {
-    font-size: 24px;
-  }
+.sidebar h2 {
+font-family: "Zilla Slab Highlight", Helvetica, Arial, sans-serif;
+letter-spacing: 0px;
+font-size: 45px;
+color: white;
+margin-top: 1rem;
+}
+
+.sidebar .lead {
+	margin-top: 1rem;
+}
 
 .content  img {
   margin: 0 auto;
@@ -35,12 +46,31 @@
 }
 
 /* Custom */
+html {
+	font-family: "Quicksand", Helvetica, Arial, sans-serif;
+}
+
+h1 {
+	font-family: "Quicksand", Helvetica, Arial, sans-serif;
+	text-transform: uppercase;
+	font-size: 1.8rem;
+	letter-spacing: 1px;
+}
+
+h2, h3, h4, h5, h6 {
+	font-family: "Quicksand", Helvetica, Arial, sans-serif;
+	margin-top: 3rem;
+	margin-bottom: 1rem;
+}
+
 .theme-base-mj .sidebar {
-  background-color: #3e8c5a;
+  background-color: #af1313;
+  /* background-image: url("/public/img/bg-violet.jpg");
+  background-size: cover; */
 }
 .theme-base-mj .content a,
 .theme-base-mj .related-posts li a:hover {
-  color: #33aa5e;
+  color: #d61313  ;
 }
 
 .theme-base-mj .content h1 a {
@@ -56,7 +86,7 @@
 	font-size:14px;
 	margin-left:20px;
 	padding:0 10px 0 12px;
-	background:#33aa5e;
+	background:#d61313;
 	color:#fff;
 	text-decoration:none;
 	-moz-border-radius-bottomright:4px;
@@ -74,7 +104,7 @@
 	left:-12px;
 	width:0;
 	height:0;
-	border-color:transparent #33aa5e transparent transparent;
+	border-color:transparent #d61313 transparent transparent;
 	border-style:solid;
 	border-width:12px 12px 14px 0;		
 	}	
@@ -90,8 +120,8 @@
 	-webkit-border-radius:2px;
 	border-radius:2px;
 	background:#fff;
-	-moz-box-shadow:-1px -1px 2px #1c7a3e;
+	/* -moz-box-shadow:-1px -1px 2px #1c7a3e;
 	-webkit-box-shadow:-1px -1px 2px #1c7a3e;
-	box-shadow:-1px -1px 2px #1c7a3e;
+	box-shadow:-1px -1px 2px #1c7a3e; */
   }		
   

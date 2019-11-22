@@ -1,30 +1,22 @@
 ---
 layout: page
-title: About
+title: About Me
 ---
 
-<p class="message">
-  Hey there! This page is included as an example. Feel free to customize it for your own use upon downloading. Carry on!
-</p>
+![Photo]()
 
-In the novel, *The Strange Case of Dr. Jeykll and Mr. Hyde*, Mr. Poole is Dr. Jekyll's virtuous and loyal butler. Similarly, Poole is an upstanding and effective butler that helps you build Jekyll themes. It's made by [@mdo](https://twitter.com/mdo).
+## Hey there!
 
-There are currently two themes built on Poole:
+I am Martin Jedwabny and I am a PhD. student at the University of Montpellier. I am also a teaching assistant for first year course "Imperative Programming" and fourth year course "Logic". Before, I was a Masters student at University of Buenos Aires. There, I was teaching assistant for fourth year course "Programming Languages Paradigms".
 
-* [Hyde](http://hyde.getpoole.com)
-* [Lanyon](http://lanyon.getpoole.com)
+## Research interests
 
-Learn more and contribute on [GitHub](https://github.com/poole).
+My research interests are varied and include Logic, Non-monotonic reasoning, Non-classical logics, Argumentation, Probability, Machine Learning and Neural Networks.
 
-## Setup
+## Affiliations
 
-Some fun facts about the setup of this project include:
+Currently, I am a member of INRIA GraphIK team, where I perform my research as a PhD. student under the supervision of Madalina Croitoru and Pierre Bisquert.
 
-* Built for [Jekyll](http://jekyllrb.com)
-* Developed on GitHub and hosted for free on [GitHub Pages](https://pages.github.com)
-* Coded with [Sublime Text 2](http://sublimetext.com), an amazing code editor
-* Designed and developed while listening to music like [Blood Bros Trilogy](https://soundcloud.com/maddecent/sets/blood-bros-series)
+## My CV
 
-Have questions or suggestions? Feel free to [open an issue on GitHub](https://github.com/poole/issues/new) or [ask me on Twitter](https://twitter.com/mdo).
-
-Thanks for reading!
+You can find my CV [here]().

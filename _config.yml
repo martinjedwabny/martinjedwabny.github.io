@@ -8,8 +8,8 @@ relative_permalinks: false
 
 # Setup
 title:            Martin Jedwabny
-tagline:          'A blog about my interests and research as a PhD. student.'
-description:      'A blog about my interests and research as a PhD. student.'
+tagline:          'PhD. student at the University of Montpellier'
+description:      'PhD. student at the University of Montpellier'
 url:              https://martinjedwabny.github.io
 baseurl:          /
 
