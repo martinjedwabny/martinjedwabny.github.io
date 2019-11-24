@@ -1,6 +1,6 @@
 ---
-layout: page
-title: 
+layout: default
+title: Home
 ---
 
 <div>
@@ -13,7 +13,7 @@ I am Martin Jedwabny and I am a PhD. student at the [University of Montpellier](
 
 ### Research interests
 
-My research interests are varied and include Logic, Non-monotonic reasoning, Non-classical logics, Argumentation, Probability, Machine Learning and Neural Networks. You can also check out my [blog]() to see what I am working on.
+My research interests are varied and include Logic, Non-monotonic reasoning, Non-classical logics, Argumentation, Probability, Machine Learning and Neural Networks. You can also check out my [blog](/blog/) to see what I am working on.
 
 ### Affiliations
 
