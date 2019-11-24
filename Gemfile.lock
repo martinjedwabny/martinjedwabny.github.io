@@ -135,6 +135,9 @@ GEM
     jekyll-mentions (1.4.1)
       html-pipeline (~> 2.3)
       jekyll (~> 3.0)
+    jekyll-octicons (9.3.0)
+      jekyll (>= 3.6, < 5.0)
+      octicons (= 9.3.0)
     jekyll-optional-front-matter (0.3.0)
       jekyll (~> 3.0)
     jekyll-paginate (1.1.0)
@@ -226,6 +229,8 @@ GEM
     namae (1.0.1)
     nokogiri (1.10.4)
       mini_portile2 (~> 2.4.0)
+    octicons (9.3.0)
+      nokogiri (>= 1.6.3.1)
     octokit (4.14.0)
       sawyer (~> 0.8.0, >= 0.5.3)
     pathutil (0.16.2)
@@ -267,6 +272,7 @@ PLATFORMS
 DEPENDENCIES
   github-pages
   jekyll-feed (~> 0.11)
+  jekyll-octicons
   jekyll-scholar (~> 5.10.1)
   rake
   tzinfo (~> 1.2)

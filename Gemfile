@@ -18,6 +18,7 @@ gem "rake"
 group :jekyll_plugins do
   gem "jekyll-feed", "~> 0.11"
   gem 'jekyll-scholar', "~> 5.10.1"
+  gem 'jekyll-octicons'
 end
 
 # Windows and JRuby does not include zoneinfo files, so bundle the tzinfo-data gem

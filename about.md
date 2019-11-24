@@ -1,22 +1,37 @@
 ---
 layout: page
-title: About Me
+title: 
 ---
 
-![Photo]()
+<div>
+    <img src="{{ site.baseurl }}public/img/profile.jpeg" alt="Avatar" class="header-img">
+</div>
 
-## Hey there!
+### Hey there!
 
-I am Martin Jedwabny and I am a PhD. student at the University of Montpellier. I am also a teaching assistant for first year course "Imperative Programming" and fourth year course "Logic". Before, I was a Masters student at University of Buenos Aires. There, I was teaching assistant for fourth year course "Programming Languages Paradigms".
+I am Martin Jedwabny and I am a PhD. student at the [University of Montpellier](https://sciences.edu.umontpellier.fr/). I am also a teaching assistant for the first year course ["Imperative Programming"](https://moodle.umontpellier.fr/course/view.php?id=5217) and fourth year course ["Logic"](https://moodle.umontpellier.fr/enrol/index.php?id=5334). Before, I was a Masters student at [University of Buenos Aires](https://www.dc.uba.ar/). There, I was a teaching assistant for the fourth year course ["Programming Languages Paradigms"](https://campus.exactas.uba.ar/course/view.php?id=1059&section=0).
 
-## Research interests
+### Research interests
 
-My research interests are varied and include Logic, Non-monotonic reasoning, Non-classical logics, Argumentation, Probability, Machine Learning and Neural Networks.
+My research interests are varied and include Logic, Non-monotonic reasoning, Non-classical logics, Argumentation, Probability, Machine Learning and Neural Networks. You can also check out my [blog]() to see what I am working on.
 
-## Affiliations
+### Affiliations
 
-Currently, I am a member of INRIA GraphIK team, where I perform my research as a PhD. student under the supervision of Madalina Croitoru and Pierre Bisquert.
+Currently, I am a member of [INRIA GraphIK](https://www.inria.fr/equipes/graphik) team, where I perform my research as a PhD. student under the supervision of [Madalina Croitoru](http://www.lirmm.fr/~croitoru/) and [Pierre Bisquert](https://dblp.org/pers/hd/b/Bisquert:Pierre). I was granted a ministerial fund for my doctoral thesis at the University of Montpellier.
 
-## My CV
+### Curriculum Vitae
 
-You can find my CV [here]().
+<details>
+<summary>Find my CV here</summary>
+<img class="img-cv" src="https://raw.githubusercontent.com/martinjedwabny/CV/master/src/cv/cv.png">
+</details>
+
+You can also [download](https://raw.githubusercontent.com/martinjedwabny/CV/master/src/cv/cv.pdf) it as PDF file.
+
+### Github repositories
+
+These are the latest repositories I've been working on.
+
+{% include projects.html %}
+
+To see the full list, see my official [Github]({{ site.github.repo }}).

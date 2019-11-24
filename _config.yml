@@ -22,6 +22,9 @@ plugins:
   - jekyll-gist
   - jekyll/scholar
 
+gems:
+  - jekyll-octicons
+
 paginate:         5
 
 excerpt_separator: <!--more-->
@@ -32,6 +35,16 @@ version:          2.1.0
 github:
   repo:           https://github.com/martinjedwabny
 
+projects:
+  sort_by: pushed
+  # sort_by options:
+  #   - pushed
+  #   - stars
+  limit: 6
+  # exclude:
+  #   archived: true
+  #   forks: true
+    
 scholar:
   style: apa
   locale: en
