@@ -4,7 +4,7 @@ title: Home
 ---
 
 <div>
-    <img src="{{ site.baseurl }}public/img/profile.jpeg" alt="Avatar" class="header-img">
+    <img src="{{ site.baseurl }}public/img/profile.jpg" alt="Avatar" class="header-img">
 </div>
 
 ### Hey there!
