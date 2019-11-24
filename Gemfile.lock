@@ -272,6 +272,7 @@ PLATFORMS
 DEPENDENCIES
   github-pages
   jekyll-feed (~> 0.11)
+  jekyll-github-metadata
   jekyll-octicons
   jekyll-paginate
   jekyll-scholar (~> 5.10.1)
