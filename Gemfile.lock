@@ -273,6 +273,7 @@ DEPENDENCIES
   github-pages
   jekyll-feed (~> 0.11)
   jekyll-octicons
+  jekyll-paginate
   jekyll-scholar (~> 5.10.1)
   rake
   tzinfo (~> 1.2)
