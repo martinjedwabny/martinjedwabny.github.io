@@ -21,8 +21,6 @@ plugins:
   - jekyll-paginate
   - jekyll-gist
   - jekyll/scholar
-
-gems:
   - jekyll-octicons
 
 paginate:         5
