@@ -1,0 +1,32 @@
+<!doctype html>
+<html>
+<head>
+  <meta charset=utf-8 />
+  <title> {% if page.title %} {{ page.title }} | {% endif %} CV</title>
+  <link href="https://fonts.googleapis.com/css?family=Roboto:100,100i,300,300i,400,400i,500,500i,700,900&display=swap" rel="stylesheet">
+  <link href="{{ site.baseurl }}public/css/cv.css" type="text/css" rel="stylesheet">
+</head>
+<body>
+  <div id="main">
+    <div id="content">
+        <h1>
+            <span class="light-weight">{% if page.firstname %} {{ page.firstname }} {% endif %}</span> <span class="black-weight">{% if page.surname %} {{ page.surname }} {% endif %}</span>
+        </h1>
+        <p class="subheadline">
+            {% if page.subheadline %} {{ page.subheadline }} {% endif %}
+        </p>
+        <div id="head-desc">
+            {% octicon home height:12 %} {% if page.address %} {{ page.address }} {% endif %} 
+        </div>
+        
+        <div id="head-desc">
+            {% octicon device-mobile height:12 %} {% if page.phone %} {{ page.phone }} {% endif %} |
+            <a href="{% if page.email %}{{ page.email }}{% endif %}">{% octicon mail height:12 %}{% if page.email %} {{ page.email }} {% endif %}</a> | 
+            <a href="https://github.com/{% if page.github %}{{ page.github }}{% endif %}">{% octicon mark-github height:12 %}{% if page.github %} {{ page.github }} {% endif %}</a> |
+            <a href="https://{% if page.website %}{{ page.website }}{% endif %}">{% octicon globe height:12 %}{% if page.website %} {{ page.website }} {% endif %}</a>
+        </div>
+        {{ content }}
+    </div>
+  </div>
+</body>
+</html>
