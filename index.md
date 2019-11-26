@@ -22,11 +22,11 @@ Currently, I am a member of [INRIA GraphIK](https://www.inria.fr/equipes/graphik
 ### Curriculum Vitae
 
 <details>
-<summary>Find my CV here</summary>
-<img class="img-cv" src="https://raw.githubusercontent.com/martinjedwabny/CV/master/src/cv/cv.png">
+    <summary>Find my CV here</summary>
+    <object id="cv" data="cv/index.html" style="width: 100%;height: 1010px;"></object>
 </details>
 
-You can also [download](https://raw.githubusercontent.com/martinjedwabny/CV/master/src/cv/cv.pdf) it as PDF file.
+You can also <a href="./cv/cv.pdf" download="jedwabny-cv.pdf">download</a> it as PDF file.
 
 ### Github repositories
 

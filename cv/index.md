@@ -14,7 +14,7 @@ website: martinjedwabny.github.io
 ## **Edu**cation
 ------
 
-### University of Montpellier - Faculty of Sciences - France
+### University of Montpellier - Faculty of Sciences
 #### PhD. in Computer Science
 ##### Montpellier, France
 ###### Oct. 2019 - Sep. 2022
@@ -22,7 +22,7 @@ website: martinjedwabny.github.io
 - Directors: Madalina Croitoru and Pierre Bisquert.
 - Ministerial fund for the University of Montpellier.
 
-### University of Buenos Aires - Faculty of Exact and Natural Sciences
+### University of Buenos Aires - Faculty of Sciences
 #### LSc. in Computer Science 
 ##### Buenos Aires, Argentina
 ######  Mar. 2013 - Jul. 2019
@@ -32,7 +32,7 @@ website: martinjedwabny.github.io
 ## **Tea**ching
 ------
 
-### University of Buenos Aires - Faculty of Exact and Natural Sciences 
+### University of Buenos Aires - Faculty of Sciences 
 #### Teaching Assistant
 ##### Buenos Aires, Argentina
 ###### Dec. 2017 - Mar. 2018
