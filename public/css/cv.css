@@ -22,6 +22,8 @@ time, mark, audio, video {
 	font-size: 100%;
 	font: inherit;
 	vertical-align: baseline;
+	font-weight: 300;
+	color: #444;
 }
 /* HTML5 display-role reset for older browsers */
 article, aside, details, figcaption, figure,
@@ -32,7 +34,7 @@ body {
 	line-height: 1;
 }
 ol, ul {
-	list-style: #222;
+	list-style: #444;
 }
 blockquote, q {
 	quotes: none;
@@ -49,46 +51,37 @@ table {
 
 /* end of reset */
 
+@media print {
+	@page {
+		margin-top: 1cm;
+		margin-bottom: 1cm;
+		margin-left: 1cm;
+		margin-right: 1cm;
+	}
+ }
 
 
 body {
 	font: normal normal 400;
-	font-size: 12pt;
+	font-size: 8pt;
 	line-height: 1.35em;
-	/*also written as...  font: normal normal 400 100%/1.5em;*/
 	font-family: 'Roboto', sans-serif;
-	/*margin-top: 1em;
-	margin-left: 1em;*/
+}
+
+#content {
+	margin-left: 20px;
+	margin-right: 20px;
 }
 
 p {
 	position: relative;
-	left: 10%;
 	margin-bottom: 0.2em;
 	margin-right: 0;
-	width: 80%;
-}
-
-code {
-	font: normal normal;
-	font-size: 90%;
-	/*line-height: 1em;*/
-	font-family: 'Roboto', sans-serif;
-	color: #222;
-}
-
-p code {
-    text-align: right;
-    float: right;
-    width: 10%;
 }
 
 
 ul {
 	position: relative;
-	left: 10%;
-	width: 75%;
-	margin-bottom: 1em;
 	margin-left: 20px;
 }
 
@@ -105,20 +98,19 @@ h1,h2,h3,h4 {
 }
 
 h1 {
-	text-align: left;
-	font-size: 3em;
-	line-height: 1em;
+	font-size: 40pt;
+	line-height: initial;
     position: relative;
-    text-align: center;
+	text-align: center;
 }
 
 h2 {
-	font-size: 24px;
-    margin-top: 1em;
+	font-size: 16pt;
+    margin-top: 0.7em;
     position: relative;
-    left: 10%;
     text-align: left;
     font-weight: 800;
+	color: #444;
 }
 
 h2 strong {
@@ -128,14 +120,41 @@ h2 strong {
 
 
 h3 {
-	font-size: 20px;
-	margin-top: 1em;
-	margin-bottom: 6px;
+    font-size: 12pt;
+    margin-top: 0.5em;
+    margin-bottom: 6px;
     position: relative;
-    left: 10%;
-    color: #777;
+    color: #555;
     text-align: left;
     font-weight: 800;
+}
+
+h4 {
+    font-size: 8pt;
+    margin-top: 0.5em;
+    margin-bottom: 6px;
+    position: relative;
+    color: #888;
+    text-align: left;
+	font-weight: 500;
+	font-variant: small-caps;
+}
+
+h5 {
+    font-size: 10pt;
+	text-align: right;
+    float: right;
+    margin-top: -40px;
+	color: #a00;
+	font-style: italic;
+}
+
+h6 {
+    font-size: 10pt;
+	text-align: right;
+    float: right;
+    margin-top: -20px;
+    font-style: italic;
 }
 
 a {
@@ -148,12 +167,12 @@ a:hover {
 }
 
 #head-desc {
-	margin-top: 1em;
 	position: relative;
 	color: #888;
 	font-family: 'Roboto', sans-serif;
-    font-size: 90%;
-    text-align: center;
+    font-size: 8pt;
+	text-align: center;
+	margin-bottom: 0.2em;
 }
 
 #head-desc a {
@@ -184,14 +203,9 @@ strong {
 
 .subheadline {
     text-align: center;
-    color: #a00;
-    text-transform: uppercase;
-    font-size: 13px;
-    font-weight: 600;
-    top: 4px;
-}
-
-hr {
-	margin-left: 10%;
-    margin-right: 10%;
+	color: #a00;
+	font-variant: small-caps;
+    font-size: 10pt;
+    font-weight: 500;
+	margin-bottom: 1em;
 }

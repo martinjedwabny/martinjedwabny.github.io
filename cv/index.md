@@ -5,7 +5,7 @@ firstname: Martin
 surname: Jedwabny
 subheadline: Computer Scientist &middot; Software Engineer
 address: 2 rue des Tresoriers de France, Apt. 2, 34000, Montpellier, France
-phone: (33)6-0563-8406
+phone: (+33) 6-0563-8406
 email: martinjedwabny@gmail.com
 github: martinjedwabny
 website: martinjedwabny.github.io
@@ -14,81 +14,71 @@ website: martinjedwabny.github.io
 ## **Edu**cation
 ------
 
-### PhD. in Computer Science
-`Oct. 2019 - Sep. 2022`
-__University of Montpellier, Faculty of Sciences - France__
-
+### University of Montpellier - Faculty of Sciences - France
+#### PhD. in Computer Science
+##### Montpellier, France
+###### Oct. 2019 - Sep. 2022
 - Topics: Logics, Knowledge base reasoning, Argumentation, and Machine Learning.
 - Directors: Madalina Croitoru and Pierre Bisquert.
 - Ministerial fund for the University of Montpellier.
 
-### LSc. in Computer Science 
-`Mar. 2013 - Jul. 2019`
-__University of Buenos Aires, Faculty of Sciences - Argentina__
+### University of Buenos Aires - Faculty of Exact and Natural Sciences
+#### LSc. in Computer Science 
+##### Buenos Aires, Argentina
+######  Mar. 2013 - Jul. 2019
 - GPA (on a 0-10 scale): 9.47.
-- Relevant Courses: Algorithms and Data Structures, Game Theory, Data Science, Probability and Statistics, Logic and Computability.
+- Relevant Courses: Algorithms and Data Structures, Probability and Statistics, Logic and Computability.
 
+## **Tea**ching
+------
 
-## Education
+### University of Buenos Aires - Faculty of Exact and Natural Sciences 
+#### Teaching Assistant
+##### Buenos Aires, Argentina
+###### Dec. 2017 - Mar. 2018
+- Teaching assistant for the 4th year course ”Paradigms of Programming Language”.
+- Tutored student in tri-weekly lectures. Acted as lecturer for several practical classes. Graded exams.
+- Main subjects: Lambda Calculus, Functional Programming, Logic Programming, Object Oriented Programming, Haskell, Prolog and Javascript.
 
-`1654-1660`
-__The King's School, Grantham.__
+## **Res**earch experience
+------
 
-`June 1661 - now`
-__Trinity College, Cambridge__
+### Inria GraphIK 
+#### MSc. Research Internship
+##### Montpellier, France
+###### Sep. 2018 - Sep. 2019
+- Performed research in novel frameworks combining defeasible logics reasoning with argumentation.
+- Main subjects: Argumentation, Logics, Defeasible Reasoning and Ranking semantics.
+- Directors: Madalina Croitoru and Pierre Bisquert.
 
-- Sizar
+## **Ind**ustry experience
+------
 
-`1667 - death`
-__Trinity College, Cambridge__
+### Doblajeando.com 
+#### Software Engineer
+##### Buenos Aires, Argentina
+###### Jan. 2018 - Sep. 2018
+- Software Engineer for Doblajeando Android and iOS application.
+- Implemented smart notepad application for dubbing actors and industry producers using Apache Cordova.
+- Main technologies: Javascript, Node.js, Angular.
 
-- Fellow
+### Despegar.com 
+#### Software Engineer
+##### Buenos Aires, Argentina
+###### Oct. 2013 - Nov. 2014
+- iOS Software Engineer for Despegar.com and Decolar.com.
+- Co-developed flight, hotel and package selling features for the iPhone and iPad platforms.
+- Main languages: Objective-C, Swift.
 
+## **Ski**lls and Communication
+------
 
+### Programming Languages
+- Main experience: Java, Javascript (Node.js and Angular), Python, LaTeX.
+- Other technologies: Scikit Learn, Tensor Flow, Web-standard (HTML, CSS), Android Platform, Haskell, Smalltalk, C++, Objective-C, Swift and
+Ocaml.
 
-## Awards
-
-`2012`
-President, *Royal Society*, London, UK
-
-Associate, *French Academy of Science*, Paris, France
-
-
-
-## Publications
-
-<!-- A list is also available [online](http://scholar.google.co.uk/citations?user=LTOTl0YAAAAJ) -->
-
-### Journals
-
-`1669`
-Newton Sir I, De analysi per æquationes numero terminorum infinitas. 
-
-`1669`
-Lectiones opticæ.
-
-etc. etc. etc.
-
-### Patents
-
-`2012`
-Infinitesimal calculus for solutions to physics problems, [SMBC](http://www.techdirt.com/articles/20121011/09312820678/if-patents-had-been-around-time-newton.shtml) patent 001
-
-
-## Occupation
-
-`1600`
-__Royal Mint__, London
-
-- Warden
-- Minted coins
-
-`1600`
-__Lucasian professor of Mathematics__, Cambridge University
-
-
-
-<!-- ### Footer
-
-Last updated: May 2013 -->
-
+### Communication
+- Native spanish speaker.
+- Proficient english speaker: Certificate of Advanced English (CAE), ESOL, University of Cambridge; Certificate of Proficiency in English (CPE), ESOL, University of Cambridge.
+- Intermediate french speaker.
