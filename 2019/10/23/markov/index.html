@@ -1,0 +1,245 @@
+<!DOCTYPE html>
+<html lang="en-us">
+
+  <head>
+  <link href="http://gmpg.org/xfn/11" rel="profile">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta http-equiv="content-type" content="text/html; charset=utf-8">
+  <script type="text/javascript" src="https://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+
+  <!-- Enable responsiveness on mobile devices-->
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1">
+
+  <title>
+    
+      Markov Logic Networks &middot; Martin Jedwabny
+    
+  </title>
+
+  <!-- CSS -->
+  <link rel="stylesheet" href="/public/css/poole.css">
+  <link rel="stylesheet" href="/public/css/syntax.css">
+  <link rel="stylesheet" href="/public/css/hyde.css">
+  <link rel="stylesheet" href="/public/css/general.css">
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=PT+Sans:400,400italic,700|Abril+Fatface">
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Quicksand:300,400,500,700&display=swap">
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Playfair+Display:400,400i,700,700i&display=swap">
+  <link href="https://fonts.googleapis.com/css?family=Zilla+Slab+Highlight:400,700&display=swap" rel="stylesheet">
+
+  <!-- Icons -->
+  <link rel="apple-touch-icon-precomposed" sizes="144x144" href="/public/logo.png">
+                                 <link rel="shortcut icon" href="/public/favicon.ico">
+
+  <!-- RSS -->
+  <link rel="alternate" type="application/rss+xml" title="RSS" href="/atom.xml">
+</head>
+
+
+  <body class="theme-base-mj">
+
+    <div class="sidebar">
+  <div class="container sidebar-sticky">
+
+    <div class="sidebar-about">
+        <a href="/">
+          <h2>
+            Martin Jedwabny
+          </h2>
+        </a>
+      <p class="lead">
+        [PhD. student] 
+        @University of Montpellier. 
+        [Team member] 
+        @INRIA GraphIK.
+      </p>
+    </div>
+
+    <nav class="sidebar-nav">
+      <a class="sidebar-nav-item" href="/">Home</a>
+
+      <a class="sidebar-nav-item active" href="/blog">Blog</a>
+      
+      <a class="sidebar-nav-item" href="https://github.com/martinjedwabny">GitHub</a>
+      <!-- <span class="sidebar-nav-item">Currently v2.1.0</span> -->
+    </nav>
+
+    <p>&copy; 2020. All rights reserved.</p>
+  </div>
+</div>
+
+
+    <div class="logo-tag">MJ</div>
+
+    <div class="content container">
+      <div class="post">
+  <h1 class="post-title">Markov Logic Networks</h1>
+  <span class="post-date">23 Oct 2019</span>
+  
+    <span class="post-tag">Logic</span>
+  
+    <span class="post-tag">Learning</span>
+  
+    <span class="post-tag">Query answering</span>
+  
+    <span class="post-tag">Statistical relational</span>
+  
+    <span class="post-tag">Markov</span>
+  
+  <p>Markov Logic Networks <a href="#markov-2006">(Richardson &amp; Domingos, 2006)</a>, a.k.a. MLN, is a representation and query answering framework that combines probability and first-order logic.</p>
+
+<!--more-->
+
+<p>Some of the interesting things about this framework:</p>
+<ul>
+  <li>It does not impose language restrictions other than finiteness of domain (constants).</li>
+  <li>It is in essence a language to specify Markov networks.</li>
+  <li>Handles uncertainty and contradictory knowledge.</li>
+  <li>It works well in practical cases: collective classification, link prediction and social network modeling for instance.</li>
+  <li>It learns weights on formulas in order to answer queries in the unit interval <script type="math/tex">[0,1]</script> by considering the notion of possible worlds.</li>
+</ul>
+
+<h2 id="markov-networks">Markov networks</h2>
+
+<p>A <strong>markov network</strong> is an undirected graph <script type="math/tex">G=(V,E)</script> where <script type="math/tex">V</script> is a set of random variables and there is an edge <script type="math/tex">(X_i,X_j) \in E</script> iff random variables <script type="math/tex">X_j</script> and <script type="math/tex">X_i</script> depend on each other. Meaning, any variable is conditionally independent from all others given its neightbors.</p>
+
+<p>Any distribution with strictly positive density can be decomposed in <strong>exponential form</strong> (given the independence condition above) as:</p>
+
+<script type="math/tex; mode=display">P(X=x) = \frac{ \exp \left( \sum\limits_{j=1}^{K} w_j f_j (x) \right) }{ \sum\limits_{x'} \exp \left( \sum\limits_{j=1}^{K} w_j f_j (x') \right) }</script>
+
+<p>In the most direct translation, there is one feature corresponding to each possible state of each clique. However, we are free to specify a much smaller number of features, as a <strong>log-linear model</strong> (at the cost of precision):</p>
+
+<script type="math/tex; mode=display">P(X=x) = \frac{ \exp \left( \sum\limits_{j=1}^{m} w_j f_j (x \mid_{D_j}) \right) }{ \sum\limits_{x'} \exp \left( \sum\limits_{j=1}^{m} w_j f_j (x' \mid_{D_j}) \right) }</script>
+
+<p>Where:</p>
+<ul>
+  <li>Each <script type="math/tex">D_i</script> is a clique of <script type="math/tex">G</script> and <script type="math/tex">f</script> takes value 1 for some values <script type="math/tex">y \in Val(D)</script> i.e. a condition.</li>
+  <li><script type="math/tex">x \mid_{D_j}</script> is the vector <script type="math/tex">x</script> restricted to the variables present in <script type="math/tex">D_j</script>.</li>
+</ul>
+
+<p>Example:</p>
+
+<p><img src="https://martinjedwabny.github.io/public/img/markov/2.png" alt="useful image" /></p>
+
+<p>Features can be learned from data, for example by greedily constructing conjunctions of atomic features <a href="#della1997inducing">(Della Pietra et al., 1997)</a>.</p>
+
+<p>Network weights can be found efficiently using standard gradient-based or quasi-Newton optimization methods, because the log-likelihood is a concave function of the weights <a href="#nocedal1999numerical">(Nocedal &amp; Wright, 1999)</a>.</p>
+
+<h2 id="logic-and-knowledge-bases">Logic and knowledge bases</h2>
+
+<p>Information can be represented by first-order <strong>knowledge bases</strong>, a set of closed formulas/sentences. 
+Formulas are constructed as usual in first-order logic with a vocabulary consisting of predicate, function, variables and (finite) constant symbols.</p>
+
+<p>A term is a constant, variable or function applied to other terms. 
+An atom is a predicate applied to terms. 
+A formula is a construct of atoms using the symbols <script type="math/tex">\{\neg , \land , \lor , \forall , \exists , \Rightarrow \}</script>. 
+A ground term/atom/formula does not contain any variables. 
+A closed formula has no free (unquantified) variables.</p>
+
+<p><img src="https://martinjedwabny.github.io/public/img/markov/1.png" alt="useful image" /></p>
+
+<p>A possible world assigns a truth value to each possible ground atom.
+A formula is satisfiable iff there exists at least one world in which it is true.
+A KB entails a formula <script type="math/tex">F</script> is every world that satisfies all sentences of KB, also satisfies <script type="math/tex">F</script>.</p>
+
+<p>Every KB in first-order logic can be converted to <a href="https://en.wikipedia.org/wiki/Conjunctive_normal_form">conjunctive normal form</a> easily, while preserving satisfiability.
+<a href="https://en.wikipedia.org/wiki/Horn_clause">Horn clauses</a>, are clauses containing at most one positive literal.</p>
+
+<p>We <strong>assume</strong> our KB is a set of Horn clauses.</p>
+
+<h2 id="markov-logic-networks">Markov logic networks</h2>
+
+<p>In a MLN, formulas in the KB have an assigned weight. They are not seen as hard constraints, but rather as targets. The higher the weight a formulas has, the greater the difference in log probability (i.e. score) between a world that satisfies the formula and one that does not, other things being equal.</p>
+
+<p>In simple terms, MLNs are an instantiation of Markov networks where the nodes (representing random variables) are ground atoms while edges represent that there is a formula where two ground atoms are present.</p>
+
+<p>Formally, given <script type="math/tex">L = \{ (F_1 , w_1) , (F_2 , w_2) , ... \}</script> a set of pairs where <script type="math/tex">F_i</script> is a formula and <script type="math/tex">w_i \in \mathbb{R}</script> its weight, and <script type="math/tex">C</script> a finite set of constants, a markov logic network <script type="math/tex">M_{L,C}=(V,E,D)</script> is a markov network where:</p>
+<ul>
+  <li><script type="math/tex">V</script> contains one <em>binary</em> node for each atom appearing in any <script type="math/tex">F_i</script> w.r.t. <script type="math/tex">C</script>.</li>
+  <li><script type="math/tex">(A_1,A_2) \in E</script> iff there is a formula <script type="math/tex">F_i</script> such that <script type="math/tex">A_1</script> and <script type="math/tex">A_2</script> appear in it.</li>
+  <li><script type="math/tex">D</script> the set of features, contains one feature for each possible grounding of each formula <script type="math/tex">F_i</script> in <script type="math/tex">L</script>.</li>
+</ul>
+
+<p>Example of a <em>grounded</em> MLN using the KB above with set of constants <script type="math/tex">C=\{A,B\}</script>:</p>
+
+<p><img src="https://martinjedwabny.github.io/public/img/markov/3.png" alt="useful image" /></p>
+
+<p>A possible world <script type="math/tex">x</script>, is a mapping from each grounded atom in the MLN to <script type="math/tex">\{0,1\}</script> representing whether that predicate is true or false. The probability distribution over possible worlds <script type="math/tex">x</script> specified by the ground Markov network <script type="math/tex">M_{L,C}</script> is given by:</p>
+
+<p><img src="https://martinjedwabny.github.io/public/img/markov/4.png" alt="useful image" /></p>
+
+<p>Where <script type="math/tex">n_i(x)</script> is the number of true groundings of <script type="math/tex">F_i</script> in <script type="math/tex">x</script>, <script type="math/tex">x_{\{i\}}</script> is the state (truth values) of the atoms appearing in <script type="math/tex">F_i</script>, and <script type="math/tex">\phi_i(x_{\{i\}}) = e^{w_i}</script> .</p>
+
+<p>In order to restrict the graph to be finite, MLNs assume that:</p>
+<ol>
+  <li>Constants are given and finite.</li>
+  <li>For each function appearing in <script type="math/tex">L</script>, the value of that function applied to every possible tuple of arguments is an element of <script type="math/tex">C</script>.</li>
+</ol>
+
+<p>MLNs preserve entailment in the following sense:</p>
+
+<p><img src="https://martinjedwabny.github.io/public/img/markov/5.png" alt="useful image" /></p>
+
+<p>In other words, in the limit of all equal infinite weights, the MLN represents a uniform distribution over the worlds that satisfy the KB, and all entailment queries can be answered by computing the probability of the query formula and checking whether it is 1.</p>
+
+<p>However, an MLN can produce useful results even when it contains contradictions.</p>
+
+<p>MLNs can <strong>answer arbitrary queries</strong> of the form “What is the probability that formula <script type="math/tex">F_1</script> holds given that formula <script type="math/tex">F_2</script> does?”:</p>
+
+<p><img src="https://martinjedwabny.github.io/public/img/markov/6.png" alt="useful image" /></p>
+
+<p>They give an efficient implementation of inference by grounding the minimal subset of the network required for answering the query and running a Gibbs sampler over this subnetwork, with initial states found by MaxWalkSat.</p>
+
+<p>Given a database, MLN weights can in principle be learned using standard methods, as follows. If the ith formula has <script type="math/tex">n_i(x)</script> true groundings in the data <script type="math/tex">x</script>, then the derivative of the log-likelihood with respect to its weight is:</p>
+
+<p><img src="https://martinjedwabny.github.io/public/img/markov/7.png" alt="useful image" /></p>
+
+<p>Where the sum is over all possible databases <script type="math/tex">x'</script>.</p>
+
+<p>Counting the number of true groundings of a formula in a database is intractable. But more efficient alternatives are presented in the paper. Weights are learned by optimizing a pseudo-likelihood measure using the L-BFGS algorithm, and clauses are learned using the CLAUDIEN system.</p>
+
+<h2 id="references">References</h2>
+
+<ol class="bibliography"><li><span id="markov-2006">Richardson, M., &amp; Domingos, P. (2006). Markov logic networks. <i>Machine Learning</i>, <i>62</i>(1-2), 107–136.</span></li>
+<li><span id="della1997inducing">Della Pietra, S., Della Pietra, V., &amp; Lafferty, J. (1997). Inducing features of random fields. <i>IEEE Transactions on Pattern Analysis and Machine Intelligence</i>, <i>19</i>(4), 380–393.</span></li>
+<li><span id="nocedal1999numerical">Nocedal, J., &amp; Wright, S. J. (1999). <i>Numerical optimization, P. Glynn and SM Robinson, eds</i>. Springer.</span></li></ol>
+
+</div>
+
+<div class="related">
+  <h2>Related Posts</h2>
+  <ul class="related-posts">
+    
+      <li>
+        <h3>
+          <a href="/2019/11/25/srl/">
+            Statistical relational learning
+            <small>25 Nov 2019</small>
+          </a>
+        </h3>
+      </li>
+    
+      <li>
+        <h3>
+          <a href="/2019/10/23/bay-markov/">
+            Bayesian and Markov networks
+            <small>23 Oct 2019</small>
+          </a>
+        </h3>
+      </li>
+    
+      <li>
+        <h3>
+          <a href="/2019/10/21/implicit-learning/">
+            Implicitly Learning to Reason in First-Order Logic
+            <small>21 Oct 2019</small>
+          </a>
+        </h3>
+      </li>
+    
+  </ul>
+</div>
+
+    </div>
+
+  </body>
+</html>

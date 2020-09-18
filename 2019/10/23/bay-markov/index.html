@@ -1,0 +1,227 @@
+<!DOCTYPE html>
+<html lang="en-us">
+
+  <head>
+  <link href="http://gmpg.org/xfn/11" rel="profile">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta http-equiv="content-type" content="text/html; charset=utf-8">
+  <script type="text/javascript" src="https://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+
+  <!-- Enable responsiveness on mobile devices-->
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1">
+
+  <title>
+    
+      Bayesian and Markov networks &middot; Martin Jedwabny
+    
+  </title>
+
+  <!-- CSS -->
+  <link rel="stylesheet" href="/public/css/poole.css">
+  <link rel="stylesheet" href="/public/css/syntax.css">
+  <link rel="stylesheet" href="/public/css/hyde.css">
+  <link rel="stylesheet" href="/public/css/general.css">
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=PT+Sans:400,400italic,700|Abril+Fatface">
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Quicksand:300,400,500,700&display=swap">
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Playfair+Display:400,400i,700,700i&display=swap">
+  <link href="https://fonts.googleapis.com/css?family=Zilla+Slab+Highlight:400,700&display=swap" rel="stylesheet">
+
+  <!-- Icons -->
+  <link rel="apple-touch-icon-precomposed" sizes="144x144" href="/public/logo.png">
+                                 <link rel="shortcut icon" href="/public/favicon.ico">
+
+  <!-- RSS -->
+  <link rel="alternate" type="application/rss+xml" title="RSS" href="/atom.xml">
+</head>
+
+
+  <body class="theme-base-mj">
+
+    <div class="sidebar">
+  <div class="container sidebar-sticky">
+
+    <div class="sidebar-about">
+        <a href="/">
+          <h2>
+            Martin Jedwabny
+          </h2>
+        </a>
+      <p class="lead">
+        [PhD. student] 
+        @University of Montpellier. 
+        [Team member] 
+        @INRIA GraphIK.
+      </p>
+    </div>
+
+    <nav class="sidebar-nav">
+      <a class="sidebar-nav-item" href="/">Home</a>
+
+      <a class="sidebar-nav-item active" href="/blog">Blog</a>
+      
+      <a class="sidebar-nav-item" href="https://github.com/martinjedwabny">GitHub</a>
+      <!-- <span class="sidebar-nav-item">Currently v2.1.0</span> -->
+    </nav>
+
+    <p>&copy; 2020. All rights reserved.</p>
+  </div>
+</div>
+
+
+    <div class="logo-tag">MJ</div>
+
+    <div class="content container">
+      <div class="post">
+  <h1 class="post-title">Bayesian and Markov networks</h1>
+  <span class="post-date">23 Oct 2019</span>
+  
+    <span class="post-tag">Probability</span>
+  
+    <span class="post-tag">Bayesian</span>
+  
+    <span class="post-tag">Markov</span>
+  
+  <p>In this article I will briefly explain and sketch the ideas behind Bayesian and Markov networks. These networks model joint probability distributions through graphs.</p>
+
+<!--more-->
+
+<p>Some probability background will be needed, but nothing out of the basics. Namely, the concepts of random variables, probability space, independence and those contained in any introductory course, as well as basic graph theory.</p>
+
+<p>A <strong>joint probability</strong> distribution <script type="math/tex">P(X_1,...,X_n)</script> for a set of random variables <script type="math/tex">\{ X_1 , ... , X_n \}</script> generalizes distributions for multiple variables. Consider a discrete domain such as the binary <script type="math/tex">\{ 0 , 1 \}</script>, if one would like to model the joint distribution <script type="math/tex">P(X_1,...,X_n)</script> through a table of values, for instance, because no explicit probability formula was given, it would lead to something like:</p>
+
+<table>
+  <thead>
+    <tr>
+      <th style="text-align: center"><script type="math/tex">X_1</script></th>
+      <th style="text-align: center">…</th>
+      <th style="text-align: center"><script type="math/tex">X_n</script></th>
+      <th style="text-align: center"><script type="math/tex">P(X_1,...,X_n)</script></th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td style="text-align: center">0</td>
+      <td style="text-align: center">…</td>
+      <td style="text-align: center">0</td>
+      <td style="text-align: center"><script type="math/tex">p_{0}</script></td>
+    </tr>
+    <tr>
+      <td style="text-align: center">0</td>
+      <td style="text-align: center">…</td>
+      <td style="text-align: center">1</td>
+      <td style="text-align: center"><script type="math/tex">p_{1}</script></td>
+    </tr>
+    <tr>
+      <td style="text-align: center">…</td>
+      <td style="text-align: center">…</td>
+      <td style="text-align: center">…</td>
+      <td style="text-align: center">…</td>
+    </tr>
+    <tr>
+      <td style="text-align: center">1</td>
+      <td style="text-align: center">…</td>
+      <td style="text-align: center">1</td>
+      <td style="text-align: center"><script type="math/tex">p_{2^n}</script></td>
+    </tr>
+  </tbody>
+</table>
+
+<p>This would not be very efficient as it grows exponentially with respect to the amount of variables.</p>
+
+<p>This is why one uses models that allow to restrict or simplify the representation. By capturing dependencies between variables we can represent the distribution more succinctly.</p>
+
+<p>A <strong>bayesian network</strong> captures a joint distribution by a relation of causality. More concretely, it is a directed acyclic graph <script type="math/tex">G=(V,E)</script> where <script type="math/tex">V</script> is a set of random variables and there is an edge <script type="math/tex">(X_i,X_j) \in E</script> iff random variable <script type="math/tex">X_j</script> depends on <script type="math/tex">X_i</script>. This implies that:</p>
+<ul>
+  <li>Because the graph is acyclic, no two random variables depend on each other.</li>
+  <li>Take a random variable <script type="math/tex">X_j</script>, given a fixed value for all <script type="math/tex">(X_i,X_j) \in E</script> (all variables it depends on), <script type="math/tex">X_j</script> is independent from all other variables.</li>
+</ul>
+
+<p>Consider the following graph:</p>
+
+<p><img src="https://martinjedwabny.github.io/public/img/bay-markov/1.png" alt="useful image" /></p>
+
+<p>Because the variables only depend on its incoming neightbors, we only need to specify the probability distributions with respect to them. Less values are needed to save all the information.</p>
+
+<p>Furthermore, because the graph is acyclic, it can be decomposed as a set of trees. All trees have a root i.e. a node without incoming edges. This is why we can always retrieve the joint probability distribution from the root to the leaves. In the example above, we have a single tree and the root would be the random variable RAIN. Noting <script type="math/tex">G</script>=GRASS, <script type="math/tex">S</script>=SPRINKER, <script type="math/tex">R</script>=RAIN:</p>
+
+<script type="math/tex; mode=display">P(G \text{=} T, S \text{=} T, R \text{=} F) = 
+P(G \text{=} T | S \text{=} T, R \text{=} F) * P(S \text{=} T | R \text{=} F) * P(R \text{=} F)</script>
+
+<p>In general, for variables <script type="math/tex">X_1, ... , X_n</script>, with each variable <script type="math/tex">X_i</script> having its causes <script type="math/tex">C(X_i)</script>, the joint probability is:</p>
+
+<script type="math/tex; mode=display">P(X_1, ... , X_n) = \prod\limits_{i=1}^{n} P(X_i | C(X_i))</script>
+
+<p>A <strong>markov network</strong>, on the other hand, captures bidirectional dependency, which suits different kinds of problems (e.g. a grid of pixels).</p>
+
+<p>Formally, a markov network is an undirected graph <script type="math/tex">G=(V,E)</script> where <script type="math/tex">V</script> is a set of random variables and there is an edge <script type="math/tex">(X_i,X_j) \in E</script> iff random variables <script type="math/tex">X_j</script> and <script type="math/tex">X_i</script> depend on each other.</p>
+
+<p>Meaning, any variable is conditionally independent from all others given its neightbors.</p>
+
+<p>Now, because of the <em>Hammersley–Clifford theorem</em>, any probability distribution that has strictly positive density can be decomposed as a markov network <script type="math/tex">G</script> and <em>potential functions</em> <script type="math/tex">\phi_{C \in \operatorname{cliques}(G)} : X_C \mapsto \mathbb{R}_{\geq 0}</script> such that:</p>
+
+<script type="math/tex; mode=display">P(X=x) = \frac{\prod\limits_{C \in \operatorname{cliques}(G)} \phi_C (C = x_C)}{\sum\limits_{x'} \prod\limits_{C \in \operatorname{cliques}(G)} \phi_C (C = x_C)}</script>
+
+<p>Where <script type="math/tex">x_C</script> is <script type="math/tex">x</script> restricted to the random variables that are included in the clique <script type="math/tex">C</script>.</p>
+
+<p><img src="https://martinjedwabny.github.io/public/img/bay-markov/2.png" alt="useful image" /></p>
+
+<p>Any distribution with strictly positive density can also be decomposed in <strong>exponential form</strong> as:</p>
+
+<script type="math/tex; mode=display">P(X=x) = \frac{ \exp \left( \sum\limits_{j=1}^{K} w_j f_j (x) \right) }{ \sum\limits_{x'} \exp \left( \sum\limits_{j=1}^{K} w_j f_j (x') \right) }</script>
+
+<p>Where the features <script type="math/tex">f_j</script> can be binary i.e. <script type="math/tex">f_j(x) \in \{0,1 \}</script> and <script type="math/tex">exp(a) = e^a</script>.</p>
+
+<p>In the most direct translation, there is one feature corresponding to each possible state of each clique. This representation is exponential in the size of the cliques.</p>
+
+<p>However, we are free to specify a much smaller number of features (e.g., logical functions of the state of the clique) at the cost of lower representation domain i.e. we can fix <script type="math/tex">K</script> to a much lower number. This allows for a more compact representation than the potential-function form.</p>
+
+<p>A distribution <script type="math/tex">P</script> is a <strong>log linear model</strong> over a Markov network <script type="math/tex">G</script> if it is associated with:</p>
+<ul>
+  <li>A set of features <script type="math/tex">\{ f_1(D_1) , ... , f_m(D_m) \}</script> where each <script type="math/tex">D_i</script> is a clique of <script type="math/tex">G</script> and <script type="math/tex">f</script> takes value 1 for some values <script type="math/tex">y \in Val(D)</script> i.e. a condition. <strong>Note</strong>: we can have several features over the same clique.</li>
+  <li>A set of weights <script type="math/tex">w_1,...,w_m</script> such that:</li>
+</ul>
+
+<script type="math/tex; mode=display">P(X=x) = \frac{ \exp \left( \sum\limits_{j=1}^{m} w_j f_j (x \mid_{D_j}) \right) }{ \sum\limits_{x'} \exp \left( \sum\limits_{j=1}^{m} w_j f_j (x' \mid_{D_j}) \right) }</script>
+
+<p>Where <script type="math/tex">x \mid_{D_j}</script> is the vector <script type="math/tex">x</script> restricted to the variables present in <script type="math/tex">D_j</script>.</p>
+
+</div>
+
+<div class="related">
+  <h2>Related Posts</h2>
+  <ul class="related-posts">
+    
+      <li>
+        <h3>
+          <a href="/2019/11/25/srl/">
+            Statistical relational learning
+            <small>25 Nov 2019</small>
+          </a>
+        </h3>
+      </li>
+    
+      <li>
+        <h3>
+          <a href="/2019/10/23/markov/">
+            Markov Logic Networks
+            <small>23 Oct 2019</small>
+          </a>
+        </h3>
+      </li>
+    
+      <li>
+        <h3>
+          <a href="/2019/10/21/implicit-learning/">
+            Implicitly Learning to Reason in First-Order Logic
+            <small>21 Oct 2019</small>
+          </a>
+        </h3>
+      </li>
+    
+  </ul>
+</div>
+
+    </div>
+
+  </body>
+</html>

@@ -1,0 +1,191 @@
+<!DOCTYPE html>
+<html lang="en-us">
+
+  <head>
+  <link href="http://gmpg.org/xfn/11" rel="profile">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta http-equiv="content-type" content="text/html; charset=utf-8">
+  <script type="text/javascript" src="https://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+
+  <!-- Enable responsiveness on mobile devices-->
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1">
+
+  <title>
+    
+      Implicitly Learning to Reason in First-Order Logic &middot; Martin Jedwabny
+    
+  </title>
+
+  <!-- CSS -->
+  <link rel="stylesheet" href="/public/css/poole.css">
+  <link rel="stylesheet" href="/public/css/syntax.css">
+  <link rel="stylesheet" href="/public/css/hyde.css">
+  <link rel="stylesheet" href="/public/css/general.css">
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=PT+Sans:400,400italic,700|Abril+Fatface">
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Quicksand:300,400,500,700&display=swap">
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Playfair+Display:400,400i,700,700i&display=swap">
+  <link href="https://fonts.googleapis.com/css?family=Zilla+Slab+Highlight:400,700&display=swap" rel="stylesheet">
+
+  <!-- Icons -->
+  <link rel="apple-touch-icon-precomposed" sizes="144x144" href="/public/logo.png">
+                                 <link rel="shortcut icon" href="/public/favicon.ico">
+
+  <!-- RSS -->
+  <link rel="alternate" type="application/rss+xml" title="RSS" href="/atom.xml">
+</head>
+
+
+  <body class="theme-base-mj">
+
+    <div class="sidebar">
+  <div class="container sidebar-sticky">
+
+    <div class="sidebar-about">
+        <a href="/">
+          <h2>
+            Martin Jedwabny
+          </h2>
+        </a>
+      <p class="lead">
+        [PhD. student] 
+        @University of Montpellier. 
+        [Team member] 
+        @INRIA GraphIK.
+      </p>
+    </div>
+
+    <nav class="sidebar-nav">
+      <a class="sidebar-nav-item" href="/">Home</a>
+
+      <a class="sidebar-nav-item active" href="/blog">Blog</a>
+      
+      <a class="sidebar-nav-item" href="https://github.com/martinjedwabny">GitHub</a>
+      <!-- <span class="sidebar-nav-item">Currently v2.1.0</span> -->
+    </nav>
+
+    <p>&copy; 2020. All rights reserved.</p>
+  </div>
+</div>
+
+
+    <div class="logo-tag">MJ</div>
+
+    <div class="content container">
+      <div class="post">
+  <h1 class="post-title">Implicitly Learning to Reason in First-Order Logic</h1>
+  <span class="post-date">21 Oct 2019</span>
+  
+    <span class="post-tag">Logic</span>
+  
+    <span class="post-tag">Learning</span>
+  
+    <span class="post-tag">Query answering</span>
+  
+  <p>This paper <a href="#implicit-learning-2019">(Belle &amp; Juba, 2019)</a> considers the problem of answering queries about infinitary first order logic (infinite but countable amount of constants) formulas based on background knowledge partially represented explicitly as other formulas, and partially represented as examples independently drawn from a fixed probability distribution.</p>
+
+<!--more-->
+
+<p>The authors present an algorithm that reduces reasoning with implicit learning to deciding entailment. Meaning it does not learn rules, but it can answer queries (i.e. resolve entailment) with implicit and explicit learning. They also provide theoretical guarantees if the implicit knowledge is drawn from a probability distribution.</p>
+
+<h2 id="idea">Idea</h2>
+
+<p>Probably approximately correct (PAC) learning is a branch of machine learning that studies function inference under polynomial time complexity contraints with respect to the probability of getting an approximately correct answer. More precisely, complexity scales polynomially the more precise the approximation is and the more probable the answer is to lie within that approximation.</p>
+
+<!-- First order logic is widely argued to be most appropriate for representing human knowledge (e.g., [McCarthy and Hayes, 1969; Moore, 1982; Levesque and Lakemeyer, 2001]). -->
+
+<p>The paper starts off by defining a first order logic language with connectives <script type="math/tex">\{\neg , \lor , \land , \forall , \exists , \Rightarrow , = \}</script> and a countably infinite set of constants, such as <script type="math/tex">\mathbb{N}</script>.</p>
+
+<!-- Note: as the authors explain, this domain of names implies that the compactness property does not hold (a set of formulas is not satisfiable necessarily if every finite subset is) because of cases such as $$\{ \exists P(x) , \neg P(1) , \neg P(2) , ... \}$$. -->
+
+<p>Their knowledge bases are defined as a finite, non-empty set of <script type="math/tex">\forall</script>-clauses. A <script type="math/tex">\forall</script>-clause is a formula of the form:</p>
+
+<script type="math/tex; mode=display">\forall x_1 ... \forall x_k \ ( e \Rightarrow a_1 \lor ... \lor a_n )</script>
+
+<p>Where:</p>
+<ul>
+  <li><script type="math/tex">a_i</script> are atoms.</li>
+  <li><script type="math/tex">e</script> is a formula built using: (i) equalities of the form <script type="math/tex">(x=c)</script> with <script type="math/tex">x</script> variable and <script type="math/tex">c</script> constant; (ii) the logical connectives <script type="math/tex">\{ \neg , \forall , \exists \}</script>.</li>
+  <li><script type="math/tex">x_1 ... x_k</script> are all the free variables of <script type="math/tex">e \Rightarrow a_1 \lor ... \lor a_n</script>.</li>
+</ul>
+
+<p>For example:</p>
+
+<script type="math/tex; mode=display">KB = \{ \forall x (Grad(x) \lor Prof(x)) , \ \forall x ((x \neq 1) \Rightarrow Grad(x)) \}</script>
+
+<p>As such, this knowledge bases are able to represent consistent sets of infinite ground clauses.</p>
+
+<p>The rank of a knowledge base is the maximum amount of universal quantifiers present in any of its clauses.</p>
+
+<!-- Now, any formula $$\alpha$$ that is provable in this KB makes $$GND^-(KB \land \neg \alpha)$$ unsatisfiable where $$GND^-$$ is the universal grounding of the set of formulas up until the maximum amount of quantifiers in any formulas in KB or those contants already present in KB. -->
+
+<p>A <strong>model</strong> of a KB is a consistent mapping from all possible grounded atoms to <script type="math/tex">\{ true , false \}</script> that satisfies the formulas of KB. A <strong>partial model</strong> of model <script type="math/tex">M</script> of KB is a mapping <script type="math/tex">N</script> from all possible grounded atoms to <script type="math/tex">\{ true , false , * \}</script> that is consistent with the model i.e. <script type="math/tex">\forall p \ N[p] \neq * \Rightarrow N[p] = M[p]</script>.</p>
+
+<p>Let <script type="math/tex">N</script> be a partial model of the KB, a ground formula is <strong>witnessed</strong> to be true iff it is true in <script type="math/tex">N</script>. Next, a <script type="math/tex">\forall</script>-clause <script type="math/tex">\forall \hat x \theta(\hat x)</script> is witnessed true in a partial model <script type="math/tex">N</script> for the set of constants <script type="math/tex">C</script> if for every binding of <script type="math/tex">\hat x</script> to constants <script type="math/tex">\hat c \in C</script>, the resulting ground clause <script type="math/tex">\theta(\hat c)</script> is witnessed true in <script type="math/tex">N</script>.</p>
+
+<p>Given a distribution <script type="math/tex">D</script> over all possible models of KB, a masking process <script type="math/tex">\Theta</script> is a function that maps a distribution over the models of KB, to a distribution over partial models of KB, i.e. <script type="math/tex">\Theta (D)</script> is a distribution over partial models of KB.</p>
+
+<p>Then, given:</p>
+<ul>
+  <li>An <em>explicit</em> KB (given as input, not inferred from examples).</li>
+  <li>A set of partial models <script type="math/tex">\{ N^{(1)} , ... ,  N^{(m)} \}</script> (sets of possible true grounded atoms) that represent witnessed examples, i.e. sets of grounded atoms that hold together in an example. They would represent the <em>implicit</em> knowledge.</li>
+  <li>A distribution <script type="math/tex">D</script> of <script type="math/tex">\{ N^{(1)} , ... ,  N^{(m)} \}</script> masked by a masking process <script type="math/tex">\Theta</script>.</li>
+  <li>A query (grounded formula) <script type="math/tex">\alpha</script>.</li>
+  <li>A number <script type="math/tex">k</script> of constants at least as large as the KB’s rank.</li>
+</ul>
+
+<p>The authors present the following algorithm to estimate the probability <script type="math/tex">\hat p</script> of the query being right:</p>
+
+<p><img src="https://martinjedwabny.github.io/public/img/implicit-learning/1.png" alt="useful image" /></p>
+
+<p>The guarantees of this procedure are given by the theorem:</p>
+
+<p><img src="https://martinjedwabny.github.io/public/img/implicit-learning/2.png" alt="useful image" /></p>
+
+<p>Where given a distribution <script type="math/tex">D</script> over <script type="math/tex">\{ N^{(1)} , ... ,  N^{(m)} \}</script>, a query <script type="math/tex">\alpha</script> is <script type="math/tex">p</script>-valid iff:</p>
+
+<p><script type="math/tex">\sum\limits_{ \{ N^{(i)} \ \mid \ N^{(i)} \models \alpha \} }Pr(N^{(i)})) \geq p</script>.</p>
+
+<h2 id="references">References</h2>
+
+<ol class="bibliography"><li><span id="implicit-learning-2019">Belle, V., &amp; Juba, B. (2019). Implicitly Learning to Reason in First-Order Logic. <i>CoRR</i>, <i>abs/1906.10106</i>. http://arxiv.org/abs/1906.10106</span></li></ol>
+
+</div>
+
+<div class="related">
+  <h2>Related Posts</h2>
+  <ul class="related-posts">
+    
+      <li>
+        <h3>
+          <a href="/2019/11/25/srl/">
+            Statistical relational learning
+            <small>25 Nov 2019</small>
+          </a>
+        </h3>
+      </li>
+    
+      <li>
+        <h3>
+          <a href="/2019/10/23/markov/">
+            Markov Logic Networks
+            <small>23 Oct 2019</small>
+          </a>
+        </h3>
+      </li>
+    
+      <li>
+        <h3>
+          <a href="/2019/10/23/bay-markov/">
+            Bayesian and Markov networks
+            <small>23 Oct 2019</small>
+          </a>
+        </h3>
+      </li>
+    
+  </ul>
+</div>
+
+    </div>
+
+  </body>
+</html>

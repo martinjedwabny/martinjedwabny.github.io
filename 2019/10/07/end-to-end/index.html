@@ -1,0 +1,194 @@
+<!DOCTYPE html>
+<html lang="en-us">
+
+  <head>
+  <link href="http://gmpg.org/xfn/11" rel="profile">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta http-equiv="content-type" content="text/html; charset=utf-8">
+  <script type="text/javascript" src="https://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+
+  <!-- Enable responsiveness on mobile devices-->
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1">
+
+  <title>
+    
+      Neural Theorem Provers &middot; Martin Jedwabny
+    
+  </title>
+
+  <!-- CSS -->
+  <link rel="stylesheet" href="/public/css/poole.css">
+  <link rel="stylesheet" href="/public/css/syntax.css">
+  <link rel="stylesheet" href="/public/css/hyde.css">
+  <link rel="stylesheet" href="/public/css/general.css">
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=PT+Sans:400,400italic,700|Abril+Fatface">
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Quicksand:300,400,500,700&display=swap">
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Playfair+Display:400,400i,700,700i&display=swap">
+  <link href="https://fonts.googleapis.com/css?family=Zilla+Slab+Highlight:400,700&display=swap" rel="stylesheet">
+
+  <!-- Icons -->
+  <link rel="apple-touch-icon-precomposed" sizes="144x144" href="/public/logo.png">
+                                 <link rel="shortcut icon" href="/public/favicon.ico">
+
+  <!-- RSS -->
+  <link rel="alternate" type="application/rss+xml" title="RSS" href="/atom.xml">
+</head>
+
+
+  <body class="theme-base-mj">
+
+    <div class="sidebar">
+  <div class="container sidebar-sticky">
+
+    <div class="sidebar-about">
+        <a href="/">
+          <h2>
+            Martin Jedwabny
+          </h2>
+        </a>
+      <p class="lead">
+        [PhD. student] 
+        @University of Montpellier. 
+        [Team member] 
+        @INRIA GraphIK.
+      </p>
+    </div>
+
+    <nav class="sidebar-nav">
+      <a class="sidebar-nav-item" href="/">Home</a>
+
+      <a class="sidebar-nav-item active" href="/blog">Blog</a>
+      
+      <a class="sidebar-nav-item" href="https://github.com/martinjedwabny">GitHub</a>
+      <!-- <span class="sidebar-nav-item">Currently v2.1.0</span> -->
+    </nav>
+
+    <p>&copy; 2020. All rights reserved.</p>
+  </div>
+</div>
+
+
+    <div class="logo-tag">MJ</div>
+
+    <div class="content container">
+      <div class="post">
+  <h1 class="post-title">Neural Theorem Provers</h1>
+  <span class="post-date">07 Oct 2019</span>
+  
+    <span class="post-tag">Logic</span>
+  
+    <span class="post-tag">Learning</span>
+  
+    <span class="post-tag">Query answering</span>
+  
+    <span class="post-tag">Neural-Symbolic</span>
+  
+  <p>This paper <a href="#rocktaschel2017end">(Rocktäschel &amp; Riedel, 2017)</a> presents Neural Theorem Provers (NTP), a framework for fuzzy/real logic i.e. [0,1]-query answering with backwards chaining and subsymbolic representation learning.</p>
+
+<!--more-->
+
+<h2 id="idea">Idea</h2>
+
+<p>We start with a first order logic language with no existential quantifiers or function symbols. 
+Knowledge bases are composed of facts and rules in Horn clause format (ala Prolog).</p>
+
+<p>We assign to each constant <em>c</em> and predicate <em>P</em> symbol a fixed length <em>k</em> vector <script type="math/tex">\Theta</script> i.e. <script type="math/tex">\Theta_c \in \mathbb{R}^k</script> and <script type="math/tex">\Theta_P \in \mathbb{R}^k</script>.</p>
+
+<p>Then, allow unification to match any two symbols (constant or predicate) and in turn add a loss to the query answer with respect to the difference between those two symbols.</p>
+
+<p>Unification tree for a query:</p>
+
+<p><img src="https://martinjedwabny.github.io/public/img/end-to-end/9.png" alt="useful image" /></p>
+
+<p>This is how symbols are unified:</p>
+
+<p><img src="https://martinjedwabny.github.io/public/img/end-to-end/2.png" alt="useful image" /></p>
+
+<p>Example of unification:</p>
+
+<p><img src="https://martinjedwabny.github.io/public/img/end-to-end/3.png" alt="useful image" /></p>
+
+<p>OR operation:</p>
+
+<p><img src="https://martinjedwabny.github.io/public/img/end-to-end/4.png" alt="useful image" /></p>
+
+<p>OR example:</p>
+
+<p><img src="https://martinjedwabny.github.io/public/img/end-to-end/5.png" alt="useful image" /></p>
+
+<p>AND operation:</p>
+
+<p><img src="https://martinjedwabny.github.io/public/img/end-to-end/7.png" alt="useful image" /></p>
+
+<p><img src="https://martinjedwabny.github.io/public/img/end-to-end/6.png" alt="useful image" /></p>
+
+<p>Finally, optimize vectors with respect to the well known facts of the knowledge base.</p>
+
+<p><img src="https://martinjedwabny.github.io/public/img/end-to-end/8.png" alt="useful image" /></p>
+
+<h2 id="how">How</h2>
+<ol>
+  <li>Start with a first order knowledge base which contains facts and rules (ala Prolog). No <script type="math/tex">\exists</script>-quantifiers and all variables are <script type="math/tex">\forall</script>-quantified implicitly.</li>
+  <li>Each symbol is assigned a random vector.</li>
+  <li>Take the known facts as positive examples and replace symbols with other (incorrect) ones to generate negative examples.</li>
+  <li>In each <em>optimization/training pass</em> run backwards chaining with a set of positive and negative examples as the <em>goals</em> (removing them from the knowledge base temporarily).</li>
+  <li>At each execution step a confidence score for one goal is calculated (even though we know if that goal is true or not), then we calculate the error of the whole training pass through the log-likelihood function and the gradient of the error with respect to the vector representation of each symbol.</li>
+  <li>After training pass, we slightly modify the vector representations according to their gradient to minimize the error. Repeat this <script type="math/tex">n \in \textrm{N}</script> times.</li>
+</ol>
+
+<h2 id="results">Results</h2>
+<ul>
+  <li>Achieved state-of-the-art accuracy with respect to ComplEx. Example dataset <script type="math/tex">\textit{Nations}</script> contains 56 binary predicates, 111 unary predicates, 14 constants and 2565 true facts. This method has a horrible time complexity because backwards chaining by itself is very demanding and doing it successively with large sets of examples leads to hard explosions. Note: proof depth is limited and no circular reasoning.</li>
+  <li>Can learn vector representations that:
+    <ol>
+      <li>Match symbols with identical meaning (<script type="math/tex">\textit{ABC}</script> and <script type="math/tex">\textit{aBc}</script>),</li>
+      <li>Express similarity between related symbols (<script type="math/tex">\textit{fatherOf}</script> and <script type="math/tex">\textit{parentOf}</script>), and</li>
+      <li>Enable to discover and utilize rules by using <script type="math/tex">\textit{parametrized rules}</script> in which the symbols are unknown but are assigned meaning through training (e.g. parametrized transitivity as <script type="math/tex">p(X,Y) \text{ :- } q(X,Z), q(Z,Y).</script>).</li>
+    </ol>
+  </li>
+</ul>
+
+<h2 id="references">References</h2>
+
+<ol class="bibliography"><li><span id="rocktaschel2017end">Rocktäschel, T., &amp; Riedel, S. (2017). End-to-end differentiable proving. <i>Advances in Neural Information Processing Systems</i>, 3788–3800.</span></li></ol>
+
+</div>
+
+<div class="related">
+  <h2>Related Posts</h2>
+  <ul class="related-posts">
+    
+      <li>
+        <h3>
+          <a href="/2019/11/25/srl/">
+            Statistical relational learning
+            <small>25 Nov 2019</small>
+          </a>
+        </h3>
+      </li>
+    
+      <li>
+        <h3>
+          <a href="/2019/10/23/markov/">
+            Markov Logic Networks
+            <small>23 Oct 2019</small>
+          </a>
+        </h3>
+      </li>
+    
+      <li>
+        <h3>
+          <a href="/2019/10/23/bay-markov/">
+            Bayesian and Markov networks
+            <small>23 Oct 2019</small>
+          </a>
+        </h3>
+      </li>
+    
+  </ul>
+</div>
+
+    </div>
+
+  </body>
+</html>

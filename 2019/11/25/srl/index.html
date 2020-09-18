@@ -1,0 +1,217 @@
+<!DOCTYPE html>
+<html lang="en-us">
+
+  <head>
+  <link href="http://gmpg.org/xfn/11" rel="profile">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta http-equiv="content-type" content="text/html; charset=utf-8">
+  <script type="text/javascript" src="https://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+
+  <!-- Enable responsiveness on mobile devices-->
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1">
+
+  <title>
+    
+      Statistical relational learning &middot; Martin Jedwabny
+    
+  </title>
+
+  <!-- CSS -->
+  <link rel="stylesheet" href="/public/css/poole.css">
+  <link rel="stylesheet" href="/public/css/syntax.css">
+  <link rel="stylesheet" href="/public/css/hyde.css">
+  <link rel="stylesheet" href="/public/css/general.css">
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=PT+Sans:400,400italic,700|Abril+Fatface">
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Quicksand:300,400,500,700&display=swap">
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Playfair+Display:400,400i,700,700i&display=swap">
+  <link href="https://fonts.googleapis.com/css?family=Zilla+Slab+Highlight:400,700&display=swap" rel="stylesheet">
+
+  <!-- Icons -->
+  <link rel="apple-touch-icon-precomposed" sizes="144x144" href="/public/logo.png">
+                                 <link rel="shortcut icon" href="/public/favicon.ico">
+
+  <!-- RSS -->
+  <link rel="alternate" type="application/rss+xml" title="RSS" href="/atom.xml">
+</head>
+
+
+  <body class="theme-base-mj">
+
+    <div class="sidebar">
+  <div class="container sidebar-sticky">
+
+    <div class="sidebar-about">
+        <a href="/">
+          <h2>
+            Martin Jedwabny
+          </h2>
+        </a>
+      <p class="lead">
+        [PhD. student] 
+        @University of Montpellier. 
+        [Team member] 
+        @INRIA GraphIK.
+      </p>
+    </div>
+
+    <nav class="sidebar-nav">
+      <a class="sidebar-nav-item" href="/">Home</a>
+
+      <a class="sidebar-nav-item active" href="/blog">Blog</a>
+      
+      <a class="sidebar-nav-item" href="https://github.com/martinjedwabny">GitHub</a>
+      <!-- <span class="sidebar-nav-item">Currently v2.1.0</span> -->
+    </nav>
+
+    <p>&copy; 2020. All rights reserved.</p>
+  </div>
+</div>
+
+
+    <div class="logo-tag">MJ</div>
+
+    <div class="content container">
+      <div class="post">
+  <h1 class="post-title">Statistical relational learning</h1>
+  <span class="post-date">25 Nov 2019</span>
+  
+    <span class="post-tag">Logic</span>
+  
+    <span class="post-tag">Probability</span>
+  
+    <span class="post-tag">Learning</span>
+  
+  <!-- What is srl -->
+<p>Statistical relational learning <a href="#koller2007introduction">(Koller et al., 2007)</a> is a branch of artificial intelligence (AI) devoted to integrate research in probability theory, statistics, logics and relational learning.
+Its main purpose is to develop learning models that handle uncertain information extracted from real world scenarios, and produce structured representations that describe objects, attributes and their relations.</p>
+
+<!--more-->
+
+<p><img src="https://martinjedwabny.github.io/public/img/srl/1.png" alt="useful image" />
+<em><center>Figure <a href="#raedt2010statistical">(Raedt &amp; Kersting, 2010)</a>: SRL as a Venn diagram.</center></em></p>
+
+<!-- Relational -->
+<p>Relational structures are able to provide complex models that describe objects in terms of attributes and relations. However, treatment of noisy, erroneous, duplicate and missing information is a common problem for relational learning systems due to their crisp representation of the domain.</p>
+
+<p><img src="https://martinjedwabny.github.io/public/img/srl/2.png" alt="useful image" />
+<em><center>Figure: an ontology RDF graph.</center></em></p>
+
+<!-- Statistical -->
+<p>During recent years, the machine learning (ML) community focused on statistical techniques (e.g. decision trees, support vector machines, neural networks, clustering, dimentionality reduction, reinforcement learning, and so on) that provided high prediction accuracy in many domains such as economics, bioinformatics, game playing, advertising, computer vision, speech recognition, natural language processing, recommendation systems just to name a few. These statistical models are inherently capable of dealing with uncertain information, though often at the expense of an interpretable model of the domain’s concepts.</p>
+
+<p><img src="https://martinjedwabny.github.io/public/img/srl/3.jpg" alt="useful image" />
+<em><center>Figure: a neural network example.</center></em></p>
+
+<!-- Why SRL: TODO change -->
+<p>Among the strong motivations for using a relational model is its ability to
+model dependencies between related instances. Intuitively, we would like to use
+our information about one object to help us reach conclusions about other, related
+objects. For example, in web data, we should be able to propagate information
+about the topic of a document to documents it has links to and documents that link
+to it.</p>
+
+<h2 id="common-problems">Common problems</h2>
+
+<p>There are some classical problems in statistical relational learning systems <a href="#koller2007introduction">(Koller et al., 2007)</a>:</p>
+<ol>
+  <li>Relational feature construction between a model’s random variables and statistical predicate invention.</li>
+  <li>Relational feature aggregation: because describing the influence of neightbors towards an object might be infeasible, aggregates provide a solution for defining relational neightborhood.</li>
+  <li>Structural uncertainty: when there are many logical interpretation for the set of random variables. Namely, when the identity, attributes or domain itself are uncertain.</li>
+</ol>
+
+<h2 id="existing-work">Existing work</h2>
+
+<p>Some approaches in the literature include <a href="#koller2007introduction">(Koller et al., 2007)</a>:</p>
+<ul>
+  <li>Inductive logic programming (ILP): learning logical rules from set of examples and background knowledge <a href="#muggleton1994inductive">(Muggleton &amp; De Raedt, 1994)</a>.</li>
+  <li>Conditional random fields (CRF): <a href="#sutton2012introduction">(Sutton et al., 2012)</a>.</li>
+  <li>Frame-based approaches:
+    <ul>
+      <li>Probabilistic relational models (PRM): <a href="#getoor2007probabilistic">(Getoor et al., 2007)</a>.</li>
+      <li>Relational markov networks (RMN): <a href="#taskar2007relational">(Taskar et al., 2007)</a>.</li>
+      <li>Probabilistic entity-relation models (PER) <a href="#heckerman2004probabilistic">(Heckerman et al., 2004)</a>.</li>
+      <li>Relational dependency networks (RDN): <a href="#neville2007relational">(Neville &amp; Jensen, 2007)</a>.</li>
+    </ul>
+  </li>
+  <li>Logic-based approaches:
+    <ul>
+      <li>Probabilistic knowledge bases.</li>
+      <li>Probabilistic logic programming.</li>
+      <li>Bayesian logic programming (BLP).</li>
+      <li>Stochastic logic programming (SLP).</li>
+      <li>Markov logic networks (MLN).</li>
+    </ul>
+  </li>
+  <li>Bayesian logic (BLOG) system, a language that defines probability distributions over outcomes with varying sets of objects. Which does not make the assumptions of unique names, requiring that the symbols or terms of the language all refer to distinct objects, and domain closure, requiring that no objects exist besides the ones referred to by terms in the language.</li>
+  <li>Integrated Bayesian Agent Language (IBAL) system: a functional programming language for probabilistic AI.</li>
+  <li>Lifted First-Order Probabilistic Inference.</li>
+  <li>Structured generalized linear regression (SGLR).</li>
+  <li>Reinforcement Learning in Relational Domains.</li>
+</ul>
+
+<h2 id="canonical-tasks">Canonical tasks</h2>
+
+<p>A number of canonical tasks are associated with statistical relational learning, the most common ones being:</p>
+
+<ul>
+  <li>Collective classification, i.e. the (simultaneous) prediction of the class of several objects given objects’ attributes and their relations.</li>
+  <li>Link prediction, i.e. predicting whether or not two or more objects are related.</li>
+  <li>Link-based clustering, i.e. the grouping of similar objects, where similarity is determined according to the links of an object, and the related task of collaborative filtering, i.e. the filtering for information that is relevant to an entity (where a piece of information is considered relevant to an entity if it is known to be relevant to a similar entity).</li>
+  <li>Social network modelling.</li>
+  <li>Object identification/entity resolution/record linkage, i.e. the identification of equivalent entries in two or more separate databases/datasets.</li>
+</ul>
+
+<!-- img -->
+<!-- ![useful image](https://martinjedwabny.github.io/public/img/gnn/6.png) -->
+
+<h2 id="references">References</h2>
+
+<ol class="bibliography"><li><span id="koller2007introduction">Koller, D., Friedman, N., Džeroski, S., Sutton, C., McCallum, A., Pfeffer, A., Abbeel, P., Wong, M.-F., Heckerman, D., Meek, C., &amp; others. (2007). <i>Introduction to statistical relational learning</i>. MIT press.</span></li>
+<li><span id="raedt2010statistical">Raedt, L. D., &amp; Kersting, K. (2010). Statistical relational learning. <i>Encyclopedia of Machine Learning</i>, 916–924.</span></li>
+<li><span id="muggleton1994inductive">Muggleton, S., &amp; De Raedt, L. (1994). Inductive logic programming: Theory and methods. <i>The Journal of Logic Programming</i>, <i>19</i>, 629–679.</span></li>
+<li><span id="sutton2012introduction">Sutton, C., McCallum, A., &amp; others. (2012). An introduction to conditional random fields. <i>Foundations and Trends <sup>Ⓡ</sup> in Machine Learning</i>, <i>4</i>(4), 267–373.</span></li>
+<li><span id="getoor2007probabilistic">Getoor, L., Friedman, N., Koller, D., Pfeffer, A., &amp; Taskar, B. (2007). Probabilistic relational models. <i>Introduction to Statistical Relational Learning</i>, <i>8</i>.</span></li>
+<li><span id="taskar2007relational">Taskar, B., Abbeel, P., Wong, M.-F., &amp; Koller, D. (2007). Relational markov networks. <i>Introduction to Statistical Relational Learning</i>, 175–200.</span></li>
+<li><span id="heckerman2004probabilistic">Heckerman, D., Meek, C., &amp; Koller, D. (2004). <i>Probabilistic models for relational data</i>. Technical Report MSR-TR-2004-30, Microsoft Research.</span></li>
+<li><span id="neville2007relational">Neville, J., &amp; Jensen, D. (2007). Relational dependency networks. <i>Journal of Machine Learning Research</i>, <i>8</i>(Mar), 653–692.</span></li></ol>
+
+</div>
+
+<div class="related">
+  <h2>Related Posts</h2>
+  <ul class="related-posts">
+    
+      <li>
+        <h3>
+          <a href="/2019/10/23/markov/">
+            Markov Logic Networks
+            <small>23 Oct 2019</small>
+          </a>
+        </h3>
+      </li>
+    
+      <li>
+        <h3>
+          <a href="/2019/10/23/bay-markov/">
+            Bayesian and Markov networks
+            <small>23 Oct 2019</small>
+          </a>
+        </h3>
+      </li>
+    
+      <li>
+        <h3>
+          <a href="/2019/10/21/implicit-learning/">
+            Implicitly Learning to Reason in First-Order Logic
+            <small>21 Oct 2019</small>
+          </a>
+        </h3>
+      </li>
+    
+  </ul>
+</div>
+
+    </div>
+
+  </body>
+</html>

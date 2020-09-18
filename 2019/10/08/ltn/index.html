@@ -1,0 +1,224 @@
+<!DOCTYPE html>
+<html lang="en-us">
+
+  <head>
+  <link href="http://gmpg.org/xfn/11" rel="profile">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta http-equiv="content-type" content="text/html; charset=utf-8">
+  <script type="text/javascript" src="https://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+
+  <!-- Enable responsiveness on mobile devices-->
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1">
+
+  <title>
+    
+      Logic Tensor Networks &middot; Martin Jedwabny
+    
+  </title>
+
+  <!-- CSS -->
+  <link rel="stylesheet" href="/public/css/poole.css">
+  <link rel="stylesheet" href="/public/css/syntax.css">
+  <link rel="stylesheet" href="/public/css/hyde.css">
+  <link rel="stylesheet" href="/public/css/general.css">
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=PT+Sans:400,400italic,700|Abril+Fatface">
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Quicksand:300,400,500,700&display=swap">
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Playfair+Display:400,400i,700,700i&display=swap">
+  <link href="https://fonts.googleapis.com/css?family=Zilla+Slab+Highlight:400,700&display=swap" rel="stylesheet">
+
+  <!-- Icons -->
+  <link rel="apple-touch-icon-precomposed" sizes="144x144" href="/public/logo.png">
+                                 <link rel="shortcut icon" href="/public/favicon.ico">
+
+  <!-- RSS -->
+  <link rel="alternate" type="application/rss+xml" title="RSS" href="/atom.xml">
+</head>
+
+
+  <body class="theme-base-mj">
+
+    <div class="sidebar">
+  <div class="container sidebar-sticky">
+
+    <div class="sidebar-about">
+        <a href="/">
+          <h2>
+            Martin Jedwabny
+          </h2>
+        </a>
+      <p class="lead">
+        [PhD. student] 
+        @University of Montpellier. 
+        [Team member] 
+        @INRIA GraphIK.
+      </p>
+    </div>
+
+    <nav class="sidebar-nav">
+      <a class="sidebar-nav-item" href="/">Home</a>
+
+      <a class="sidebar-nav-item active" href="/blog">Blog</a>
+      
+      <a class="sidebar-nav-item" href="https://github.com/martinjedwabny">GitHub</a>
+      <!-- <span class="sidebar-nav-item">Currently v2.1.0</span> -->
+    </nav>
+
+    <p>&copy; 2020. All rights reserved.</p>
+  </div>
+</div>
+
+
+    <div class="logo-tag">MJ</div>
+
+    <div class="content container">
+      <div class="post">
+  <h1 class="post-title">Logic Tensor Networks</h1>
+  <span class="post-date">08 Oct 2019</span>
+  
+    <span class="post-tag">Logic</span>
+  
+    <span class="post-tag">Learning</span>
+  
+    <span class="post-tag">Query answering</span>
+  
+    <span class="post-tag">Neural-Symbolic</span>
+  
+  <!-- Intro -->
+
+<p>Logic Tensor Networks <a href="#serafini2016logic">(Serafini &amp; Garcez, 2016)</a> is a framework for learning and reasoning combining neural-network capabilities with knowledge base data representation structures using first-order logic.</p>
+
+<!-- Problem -->
+
+<p>They address the problem of (i) query answering in the unit interval [0,1] (also known as fuzzy or real logic), as well as, (ii) subsymbolic (vector) representation finding of constant symbols, function symbols and predicates.</p>
+
+<!--more-->
+
+<h2 id="idea">Idea</h2>
+
+<p>The framework takes as input a first-order logic knowledge base containing sentences and a target truth interval <script type="math/tex">[v,w] \subseteq [0,1]</script> for each of them. Constant symbols (representing objects) are translated to (real space, fixed size) vectors, function symbols are intepreted as linear transformations and predicate symbols as non-linear mappings from real space vectors to the unit interval. These 3 types of mappings are performed via learnable parameters. A loss function models how far this mappings differ from the target truth intervals <script type="math/tex">[v,w]</script>. Then, these mappings are optimized resulting in constant, function and predicate symbol mappings that best replicate the truth interval modeled by the knowledge base.</p>
+
+<h2 id="how">How</h2>
+
+<p>The paper’s builds upon a (first-order) language <script type="math/tex">\mathcal{L}</script> with constant <script type="math/tex">\mathcal{C}</script>, function <script type="math/tex">\mathcal{F}</script> and predicate <script type="math/tex">\mathcal{P}</script> symbols. Knowledge is represented through sentences (formulas) in <a href="http://mathworld.wolfram.com/SkolemizedForm.html">skolemized conjuctive normal form</a> e.g.: 
+<script type="math/tex">P(apple)</script>,
+<script type="math/tex">\forall x P(apple) \rightarrow Q(apple, x)</script>,
+<script type="math/tex">\forall x \forall y (Q(x,y) \rightarrow R(x,f(y)))</script>.
+Constants, functions and predicates are interpreted through a <strong>grounding</strong> <script type="math/tex">\mathcal{G}</script>:</p>
+
+<ol>
+  <li>
+    <p><script type="math/tex">\mathcal{G}(c) \in \mathbb{R}^n \ \forall c \in \mathcal{C}</script>.</p>
+  </li>
+  <li>
+    <p><script type="math/tex">\mathcal{G}(f) \in \mathbb{R}^{n * arity(f)} \rightarrow\mathbb{R}^n  \ \forall f \in \mathcal{F}</script> s.t.
+<script type="math/tex">\mathcal{G}(f(t_1,...,t_m)) = \mathcal{G}(f)(\mathcal{G}(t_1),...,\mathcal{G}(t_m))</script>.</p>
+  </li>
+  <li>
+    <p><script type="math/tex">\mathcal{G}(P) \in \mathbb{R}^{n * arity(P)} \rightarrow [0,1] \ \forall P \in \mathcal{P}</script> s.t.
+<script type="math/tex">\mathcal{G}(P(t_1,...,t_m)) = \mathcal{G}(P)(\mathcal{G}(t_1),...,\mathcal{G}(t_m))</script>,
+<script type="math/tex">\mathcal{G}(\neg P(X)) = 1- \mathcal{G}(P(X)) \text{ and } \mathcal{G}(\phi_1 \lor \phi_2) = \mu (\mathcal{G}(\phi_1), \mathcal{G}(\phi_2))</script>.</p>
+  </li>
+</ol>
+
+<p>where <script type="math/tex">\mu</script> is a t-conorm such as <script type="math/tex">\mu(a,b) = min(a+b, 1)</script>.</p>
+
+<p>More concretely,</p>
+
+<ul>
+  <li>
+    <p>Constants <script type="math/tex">\mathcal{G}(c_i) = \textbf{v}_i</script> can be given or learned (and initialized randomly).</p>
+  </li>
+  <li>
+    <p>Functions are learnable linear transformations:</p>
+  </li>
+</ul>
+
+<p><img src="https://martinjedwabny.github.io/public/img/ltn/4.png" alt="useful image" /></p>
+
+<ul>
+  <li>Predicates are learnable non-linear transformations mapping to the unit interval given by:</li>
+</ul>
+
+<p><img src="https://martinjedwabny.github.io/public/img/ltn/5.png" alt="useful image" /></p>
+
+<p>The knowledge is represented by what is called a grounded theory:</p>
+
+<p><img src="https://martinjedwabny.github.io/public/img/ltn/1.png" alt="useful image" /></p>
+
+<p>Then, the loss of a specific grounding which expands the initial partial grounding of a grounded theory is defined as:</p>
+
+<p><img src="https://martinjedwabny.github.io/public/img/ltn/2.png" alt="useful image" /></p>
+
+<p>And finally, in order to restrict the grounding search space to a subset of grounding functions <script type="math/tex">\mathbb{G}</script> and a subset of clause instantiations <script type="math/tex">K_0</script>:</p>
+
+<p><img src="https://martinjedwabny.github.io/public/img/ltn/3.png" alt="useful image" /></p>
+
+<p>In this case, <script type="math/tex">\mathbb{G}</script> is the space of groundings defined by (2) and (3) above, while clause instantiations <script type="math/tex">K_0</script> are every possible instance up until certain fixed depth <em>k</em>.</p>
+
+<p>The problem of <strong>query answering</strong> is thus solved by our interpretations of the symbols in our logic vocabulary. Namely, given a query <script type="math/tex">Q(c)</script>, recall that the grounding <script type="math/tex">\mathcal{G}(Q(c)) \in [0,1]</script> because <script type="math/tex">\mathcal{G}(Q(c)) = \mathcal{G}(Q)(\mathcal{G}(c))</script> where <script type="math/tex">\mathcal{G}(c) \in \mathbb{R}^n</script> and <script type="math/tex">\mathcal{G}(Q) \in \mathbb{R}^n \mapsto [0,1]</script>.</p>
+
+<p>To <strong>train</strong>, all clauses are grounded until depth <em>k</em>, the error is calculated as explained above, and groundings for constants, functions and predicate symbols are optimized successively until the error is minimized (through standard deep learning frameworks).</p>
+
+<h2 id="results">Results</h2>
+
+<ul>
+  <li>There is a Tensorflow implementation called ltn available in <a href="https://github.com/logictensornetworks/logictensornetworks">Github</a>.</li>
+  <li>The first order logic language presented is highly expressive, being able to support function symbols and the negation operator (with the open world assumption).</li>
+  <li>Query answering becomes highly efficient as predicate and function symbols are interpreted as functions.</li>
+  <li>Training is not efficient, as it require grounding all clauses (even limiting it to certain depth becomes problematic if the knowledge base is sufficiently large).</li>
+  <li>From <a href="#bianchi2019capabilities">(Bianchi &amp; Hitzler, 2019)</a>:
+    <ol>
+      <li>Time to learn the parameters is highly influenced by the arity of the predicates.</li>
+      <li>Satisfiability is strongly related with performance of the model: the higher the satisfiability the lower the error.</li>
+      <li>More complex inferences (multi-hop) are more difficult to capture in the model.</li>
+    </ol>
+  </li>
+</ul>
+
+<!-- Opinion -->
+
+<h2 id="references">References</h2>
+
+<ol class="bibliography"><li><span id="serafini2016logic">Serafini, L., &amp; Garcez, A. d’A. (2016). Logic tensor networks: Deep learning and logical reasoning from data and knowledge. <i>ArXiv Preprint ArXiv:1606.04422</i>.</span></li>
+<li><span id="bianchi2019capabilities">Bianchi, F., &amp; Hitzler, P. (2019). On the Capabilities of Logic Tensor Networks for Deductive Reasoning. <i>AAAI Spring Symposium: Combining Machine Learning with Knowledge Engineering</i>.</span></li></ol>
+
+</div>
+
+<div class="related">
+  <h2>Related Posts</h2>
+  <ul class="related-posts">
+    
+      <li>
+        <h3>
+          <a href="/2019/11/25/srl/">
+            Statistical relational learning
+            <small>25 Nov 2019</small>
+          </a>
+        </h3>
+      </li>
+    
+      <li>
+        <h3>
+          <a href="/2019/10/23/markov/">
+            Markov Logic Networks
+            <small>23 Oct 2019</small>
+          </a>
+        </h3>
+      </li>
+    
+      <li>
+        <h3>
+          <a href="/2019/10/23/bay-markov/">
+            Bayesian and Markov networks
+            <small>23 Oct 2019</small>
+          </a>
+        </h3>
+      </li>
+    
+  </ul>
+</div>
+
+    </div>
+
+  </body>
+</html>

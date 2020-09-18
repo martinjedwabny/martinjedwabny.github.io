@@ -1,0 +1,211 @@
+/* http://meyerweb.com/eric/tools/css/reset/
+   v2.0 | 20110126
+   License: none (public domain)
+*/
+
+html, body, div, span, applet, object, iframe,
+h1, h2, h3, h4, h5, h6, p, blockquote, pre,
+a, abbr, acronym, address, big, cite, code,
+del, dfn, em, img, ins, kbd, q, s, samp,
+small, strike, strong, sub, sup, tt, var,
+b, u, i, center,
+dl, dt, dd, ol, ul, li,
+fieldset, form, label, legend,
+table, caption, tbody, tfoot, thead, tr, th, td,
+article, aside, canvas, details, embed,
+figure, figcaption, footer, header, hgroup,
+menu, nav, output, ruby, section, summary,
+time, mark, audio, video {
+	margin: 0;
+	padding: 0;
+	border: 0;
+	font-size: 100%;
+	font: inherit;
+	vertical-align: baseline;
+	font-weight: 300;
+	color: #444;
+}
+/* HTML5 display-role reset for older browsers */
+article, aside, details, figcaption, figure,
+footer, header, hgroup, menu, nav, section {
+	display: block;
+}
+body {
+	line-height: 1;
+}
+ol, ul {
+	list-style: #444;
+}
+blockquote, q {
+	quotes: none;
+}
+blockquote:before, blockquote:after,
+q:before, q:after {
+	content: '';
+	content: none;
+}
+table {
+	border-collapse: collapse;
+	border-spacing: 0;
+}
+
+/* end of reset */
+
+@media print {
+	@page {
+		margin-top: 1cm;
+		margin-bottom: 1cm;
+		margin-left: 1cm;
+		margin-right: 1cm;
+	}
+ }
+
+
+body {
+	font: normal normal 400;
+	font-size: 8pt;
+	line-height: 1.35em;
+	font-family: 'Roboto', sans-serif;
+}
+
+#content {
+	margin-left: 20px;
+	margin-right: 20px;
+}
+
+p {
+	position: relative;
+	margin-bottom: 0.2em;
+	margin-right: 0;
+}
+
+
+ul {
+	position: relative;
+	margin-left: 20px;
+}
+
+li ul {
+	position: relative;
+	left: 0;
+	width: 100%;
+	margin-top: 0.25em;
+}
+
+h1,h2,h3,h4 {
+	font-weight: 400;
+	font-family: 'Roboto', sans-serif;
+}
+
+h1 {
+	font-size: 40pt;
+	line-height: initial;
+    position: relative;
+	text-align: center;
+}
+
+h2 {
+	font-size: 16pt;
+    margin-top: 0.7em;
+    position: relative;
+    text-align: left;
+    font-weight: 800;
+	color: #444;
+}
+
+h2 strong {
+    font-weight: 800;
+    color: #a00;
+}
+
+
+h3 {
+    font-size: 12pt;
+    margin-top: 0.5em;
+    margin-bottom: 6px;
+    position: relative;
+    color: #555;
+    text-align: left;
+    font-weight: 800;
+}
+
+h4 {
+    font-size: 8pt;
+    margin-top: 0.5em;
+    margin-bottom: 6px;
+    position: relative;
+    color: #888;
+    text-align: left;
+	font-weight: 500;
+	font-variant: small-caps;
+}
+
+h5 {
+    font-size: 10pt;
+	text-align: right;
+    float: right;
+    margin-top: -40px;
+	color: #a00;
+	font-style: italic;
+}
+
+h6 {
+    font-size: 10pt;
+	text-align: right;
+    float: right;
+    margin-top: -20px;
+    font-style: italic;
+}
+
+a {
+	color: inherit;
+	text-decoration:none
+}
+
+a:hover {
+	color:#39f
+}
+
+#head-desc {
+	position: relative;
+	color: #888;
+	font-family: 'Roboto', sans-serif;
+    font-size: 8pt;
+	text-align: center;
+	margin-bottom: 0.2em;
+}
+
+#head-desc a {
+	text-decoration: none;
+}
+
+em {
+	font-style: normal;
+	color: #2d4e5e
+}
+
+strong {
+	font-weight: bold;
+}
+
+#ghbutton {
+	display: none;
+	visibility: hidden;
+}
+
+.light-weight {
+    font-weight:100;
+}
+
+.black-weight {
+    font-weight:900;
+}
+
+.subheadline {
+    text-align: center;
+	color: #a00;
+	font-variant: small-caps;
+    font-size: 10pt;
+    font-weight: 500;
+	margin-bottom: 1em;
+}

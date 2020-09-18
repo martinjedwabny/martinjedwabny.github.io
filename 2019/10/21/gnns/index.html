@@ -1,0 +1,178 @@
+<!DOCTYPE html>
+<html lang="en-us">
+
+  <head>
+  <link href="http://gmpg.org/xfn/11" rel="profile">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta http-equiv="content-type" content="text/html; charset=utf-8">
+  <script type="text/javascript" src="https://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+
+  <!-- Enable responsiveness on mobile devices-->
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1">
+
+  <title>
+    
+      How Powerful are Graph Neural Networks? &middot; Martin Jedwabny
+    
+  </title>
+
+  <!-- CSS -->
+  <link rel="stylesheet" href="/public/css/poole.css">
+  <link rel="stylesheet" href="/public/css/syntax.css">
+  <link rel="stylesheet" href="/public/css/hyde.css">
+  <link rel="stylesheet" href="/public/css/general.css">
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=PT+Sans:400,400italic,700|Abril+Fatface">
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Quicksand:300,400,500,700&display=swap">
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Playfair+Display:400,400i,700,700i&display=swap">
+  <link href="https://fonts.googleapis.com/css?family=Zilla+Slab+Highlight:400,700&display=swap" rel="stylesheet">
+
+  <!-- Icons -->
+  <link rel="apple-touch-icon-precomposed" sizes="144x144" href="/public/logo.png">
+                                 <link rel="shortcut icon" href="/public/favicon.ico">
+
+  <!-- RSS -->
+  <link rel="alternate" type="application/rss+xml" title="RSS" href="/atom.xml">
+</head>
+
+
+  <body class="theme-base-mj">
+
+    <div class="sidebar">
+  <div class="container sidebar-sticky">
+
+    <div class="sidebar-about">
+        <a href="/">
+          <h2>
+            Martin Jedwabny
+          </h2>
+        </a>
+      <p class="lead">
+        [PhD. student] 
+        @University of Montpellier. 
+        [Team member] 
+        @INRIA GraphIK.
+      </p>
+    </div>
+
+    <nav class="sidebar-nav">
+      <a class="sidebar-nav-item" href="/">Home</a>
+
+      <a class="sidebar-nav-item active" href="/blog">Blog</a>
+      
+      <a class="sidebar-nav-item" href="https://github.com/martinjedwabny">GitHub</a>
+      <!-- <span class="sidebar-nav-item">Currently v2.1.0</span> -->
+    </nav>
+
+    <p>&copy; 2020. All rights reserved.</p>
+  </div>
+</div>
+
+
+    <div class="logo-tag">MJ</div>
+
+    <div class="content container">
+      <div class="post">
+  <h1 class="post-title">How Powerful are Graph Neural Networks?</h1>
+  <span class="post-date">21 Oct 2019</span>
+  
+    <span class="post-tag">Graph neural networks</span>
+  
+  <p>Graph neural networks (GNNs) is a framework that allows to learn representations in a graph. This paper <a href="#gnn-xu-2019">(Xu et al., 2018)</a> discusses previous architectures, analyses their power of representation and presents their own GNN which is maximally powerful under certain constraints.</p>
+
+<!--more-->
+
+<h2 id="gnn-architecture">GNN architecture</h2>
+
+<p>In this NN architecture we learn to predict a vector representation for each node in a given graph. Each node <script type="math/tex">v</script> in this graph <script type="math/tex">G=(V,E)</script>, with a fixed representation of nodes and edges,  contains a vector of real numbers <script type="math/tex">X_v</script> that changes in order to learn one of the following: (1) Node classification, where given a classification <script type="math/tex">y_v</script> for each node and a function <script type="math/tex">f</script>, we learn <script type="math/tex">X_v</script> such that <script type="math/tex">f(X_v) = y_v</script>; (2) Graph classification, where given a set of graphs <script type="math/tex">G_1,...,G_n</script> classified by labels <script type="math/tex">y_1,...,y_n</script> and an aggregation function <script type="math/tex">h</script>, we learn <script type="math/tex">X_v</script> for each node such that the aggregation of each graph matches its label i.e. <script type="math/tex">h(G_i) = y_i</script>.</p>
+
+<p>If we only want to learn the representation of the nodes (case 1), we define two operations, <strong>aggregate</strong> and <strong>combine</strong> (as in the image below) that tweak the representation of each node with respect to its neightbours. This functions are learnable and are run a certain number of times (K) so no full convergence is required. In the case we want Graph classification (case 2), a <strong>readout</strong> operation is implemented as well, which maps the set of nodes to the same space as the graph classes. After the final (K) iteration of <strong>aggregate &amp; combine</strong> operations in the graph, the loss of the nodes/graph is calculated w.r.t. the target classes and the <strong>aggregate &amp; combine</strong> functions are updated by calculating the derivatives of the loss to the learnable parameters (the matrix W in the example below). Then, iterations are repeated until we get the target representations.</p>
+
+<p><img src="https://martinjedwabny.github.io/public/img/gnn/1a.png" alt="useful image" /></p>
+
+<p><img src="https://martinjedwabny.github.io/public/img/gnn/1b.png" alt="useful image" /></p>
+
+<h2 id="analysis-and-limitations">Analysis and limitations</h2>
+
+<p>To analyse how powerful GNN architectures are, the authors propose the Weisfeiler-Lehman (WL) test:</p>
+
+<p><img src="https://martinjedwabny.github.io/public/img/gnn/2.png" alt="useful image" /></p>
+
+<p>Basically, an embedding (i.e. a function that maps the nodes of a graph to a vector space) has to map the nodes of different graphs to different vectors. The difference between this test and normal graph isomorphism is that it does not require isomorphic (i.e. structurally equivalent) graphs to be mapped to the same vector. This has been shown to work well in most cases (except regular graphs).</p>
+
+<p>GNNs are at most as powerful as the WL test (otherwise they would solve graph isomorphism in polynomial time, a complexity problem not solved to the date of this post, although not-confirmed quasipolynomial time algorithms have been shown in the literature). Still, they can be exactly as powerful as the test if the following conditions are met:</p>
+
+<p><img src="https://martinjedwabny.github.io/public/img/gnn/3.png" alt="useful image" /></p>
+
+<h2 id="gins">GINs</h2>
+
+<p>Next, the authors present Graph Isomorphism Networks (GIN) that satisfy the theorem above. Namely, GINs can model any Graph classification (case 2) problem and obtain the representation of each node, such that (by theorem) if two graphs are different, nodes are guaranteed to be assigned different representations. The nodes, edges and node embeddings are modeled as explained before, what they define is a particular <strong>aggregate &amp; combine</strong> function that satisfies the theorem.</p>
+
+<p><img src="https://martinjedwabny.github.io/public/img/gnn/4.png" alt="useful image" /></p>
+
+<p>They also suggest a <strong>readout</strong> function that works well in practice from previous literature:</p>
+
+<p><img src="https://martinjedwabny.github.io/public/img/gnn/5.png" alt="useful image" /></p>
+
+<p>Finally they compare the power of their architecture to others and test GINs in practice vs. GCN and GraphSAGE.</p>
+
+<p><img src="https://martinjedwabny.github.io/public/img/gnn/6.png" alt="useful image" /></p>
+
+<h2 id="conclusion">Conclusion</h2>
+
+<ul>
+  <li>
+    <p>Developed theoretical foundations for reasoning about the expressive power of
+GNNs.</p>
+  </li>
+  <li>
+    <p>Designed a provably maximally powerful GNN under the neighborhood aggregation framework.</p>
+  </li>
+  <li>
+    <p>Achieved state-of-the-art performance.</p>
+  </li>
+</ul>
+
+<h2 id="references">References</h2>
+
+<ol class="bibliography"><li><span id="gnn-xu-2019">Xu, K., Hu, W., Leskovec, J., &amp; Jegelka, S. (2018). How Powerful are Graph Neural Networks? <i>CoRR</i>, <i>abs/1810.00826</i>. http://arxiv.org/abs/1810.00826</span></li></ol>
+
+</div>
+
+<div class="related">
+  <h2>Related Posts</h2>
+  <ul class="related-posts">
+    
+      <li>
+        <h3>
+          <a href="/2019/11/25/srl/">
+            Statistical relational learning
+            <small>25 Nov 2019</small>
+          </a>
+        </h3>
+      </li>
+    
+      <li>
+        <h3>
+          <a href="/2019/10/23/markov/">
+            Markov Logic Networks
+            <small>23 Oct 2019</small>
+          </a>
+        </h3>
+      </li>
+    
+      <li>
+        <h3>
+          <a href="/2019/10/23/bay-markov/">
+            Bayesian and Markov networks
+            <small>23 Oct 2019</small>
+          </a>
+        </h3>
+      </li>
+    
+  </ul>
+</div>
+
+    </div>
+
+  </body>
+</html>
