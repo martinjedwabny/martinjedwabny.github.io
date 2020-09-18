@@ -3,6 +3,7 @@ source "https://rubygems.org"
 gem "github-pages", group: :jekyll_plugins
 
 group :jekyll_plugins do
+  gem "jemoji"
   gem "jekyll-feed", "~> 0.11"
   gem 'jekyll-scholar', "~> 5.10.1"
   gem 'jekyll-octicons'

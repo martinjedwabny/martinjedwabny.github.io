@@ -9,15 +9,7 @@ title: Home
 
 ### Hey there!
 
-I am Martin Jedwabny and I am a PhD. student at the [University of Montpellier](https://sciences.edu.umontpellier.fr/). I am also a teaching assistant for the first year course ["Imperative Programming"](https://moodle.umontpellier.fr/course/view.php?id=5217) and fourth year course ["Logic"](https://moodle.umontpellier.fr/enrol/index.php?id=5334). Before, I was a Masters student at [University of Buenos Aires](https://www.dc.uba.ar/). There, I was a teaching assistant for the fourth year course ["Programming Languages Paradigms"](https://campus.exactas.uba.ar/course/view.php?id=1059&section=0).
-
-### Research interests
-
-My research interests are varied and include Logic, Non-monotonic reasoning, Non-classical logics, Argumentation, Probability, Machine Learning and Neural Networks. You can also check out my [blog](/blog/) to see what I am working on.
-
-### Affiliations
-
-Currently, I am a member of [INRIA GraphIK](https://www.inria.fr/equipes/graphik) team, where I perform my research as a PhD. student under the supervision of [Madalina Croitoru](http://www.lirmm.fr/~croitoru/) and [Pierre Bisquert](https://dblp.org/pers/hd/b/Bisquert:Pierre). I was granted a ministerial fund for my doctoral thesis at the University of Montpellier.
+I am Martin Jedwabny and I am a PhD. student at the [University of Montpellier](https://sciences.edu.umontpellier.fr/). My research interests are varied and include Logic, Non-monotonic reasoning, Non-classical logics, Argumentation, Probability, Machine Learning and Neural Networks. You can also check out my [blog](/blog/) to see what I am working on.
 
 ### Curriculum Vitae
 
@@ -28,6 +20,19 @@ Currently, I am a member of [INRIA GraphIK](https://www.inria.fr/equipes/graphik
 
 You can also <a href="./cv/cv.pdf" download="jedwabny-cv.pdf">download</a> it as PDF file.
 
+### Publications
+
+*2020*
+
+- Explaining ethical planning using ASP. *Martin Jedwabny, Pierre Bisquert, Madalina Croitoru*. KR 2020.
+- Gradual Semantics for Logic-Based Bipolar Graphs Using T-(Co)norms. *Martin Jedwabny, Madalina Croitoru, Pierre Bisquert*. ECAI 2020.
+
+*2019*
+
+- PAPOW: Papow Aggregates Preferences and Orderings to select Winners. *Martin Jedwabny, Pierre Bisquert, Madalina Croitoru*. AAMAS 2019.
+
+You can also find me at [Google Scholar](https://scholar.google.com/citations?user=tmPJhasAAAAJ&hl=en) and [DBLP](https://dblp.org/pid/241/7703.html).
+
 ### Github repositories
 
 These are the latest repositories I've been working on.
@@ -35,3 +40,7 @@ These are the latest repositories I've been working on.
 {% include projects.html %}
 
 To see the full list, see my official [Github]({{ site.github.repo }}).
+
+### Affiliations
+
+Currently, I am a member of [INRIA GraphIK](https://www.inria.fr/equipes/graphik) team, where I perform my research as a PhD. student under the supervision of [Madalina Croitoru](http://www.lirmm.fr/~croitoru/) and [Pierre Bisquert](https://dblp.org/pers/hd/b/Bisquert:Pierre). I was granted a ministerial fund for my doctoral thesis at the University of Montpellier.
