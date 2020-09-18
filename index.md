@@ -24,7 +24,7 @@ You can also <a href="./cv/cv.pdf" download="jedwabny-cv.pdf">download</a> it as
 
 *2020*
 
-- Explaining ethical planning using ASP. *Martin Jedwabny, Pierre Bisquert, Madalina Croitoru*. KR 2020.
+- Explaining ethical planning using ASP. *Martin Jedwabny, Pierre Bisquert, Madalina Croitoru*. XLoKR 2020.
 - Gradual Semantics for Logic-Based Bipolar Graphs Using T-(Co)norms. *Martin Jedwabny, Madalina Croitoru, Pierre Bisquert*. ECAI 2020.
 
 *2019*
