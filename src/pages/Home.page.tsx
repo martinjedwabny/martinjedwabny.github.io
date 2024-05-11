@@ -1,5 +1,7 @@
 import { FloatingNav } from "@/components/FloatingNav/FloatingNav";
 import HeroSection from "@/components/HeroSection/HeroSection";
+import githubIcon from "@/images/github.svg";
+import linkedinIcon from "@/images/linkedin.svg";
 
 const navItems = [
   {
@@ -11,17 +13,22 @@ const navItems = [
     onClick: () => { },
   },
   {
-    name: "Projects",
-    onClick: () => { },
-  },
-  {
     name: "Research",
     onClick: () => { },
+  }
+];
+
+const navIcons = [
+  {
+    name: "Github",
+    iconPath: githubIcon,
+    href: "https://github.com/martinjedwabny"
   },
   {
-    name: "Contact",
-    onClick: () => { },
-  },
+    name: "LinkedIn",
+    iconPath: linkedinIcon,
+    href: "https://www.linkedin.com/in/martinjedwabny/"
+  }
 ];
 
 export function HomePage() {
@@ -29,7 +36,7 @@ export function HomePage() {
     <>
       <FloatingNav
         navItems={navItems}
-        className="hidden md:flex"
+        navIcons={navIcons}
       />
       <HeroSection />
       <div className="h-[200vh]"></div>
