@@ -10,3 +10,4 @@ function App() {
 }
 
 ReactDOM.createRoot(document.getElementById('root')!).render(<App />);
+document.body.classList.add('dark');
