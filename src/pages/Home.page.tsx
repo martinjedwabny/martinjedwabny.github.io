@@ -29,6 +29,7 @@ export function HomePage() {
     <>
       <FloatingNav
         navItems={navItems}
+        className="hidden md:flex"
       />
       <HeroSection />
       <div className="h-[200vh]"></div>
