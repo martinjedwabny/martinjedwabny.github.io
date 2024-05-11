@@ -1,12 +1,9 @@
-import { Welcome } from '../components/Welcome/Welcome';
-import { ColorSchemeToggle } from '../components/ColorSchemeToggle/ColorSchemeToggle';
-import { Image } from '@mantine/core';
 import imgSrc from "@/images/avat.png";
 
 export function HomePage() {
   return (
     <>
-      <Image
+      <img
         src={imgSrc}
         alt='Mantine logo'
         height={140}
@@ -17,8 +14,7 @@ export function HomePage() {
           width: '140px',
         }}
       />
-      <Welcome />
-      <ColorSchemeToggle />
+      <h1 className="text-3xl font-bold underline">Hello world!</h1>;
     </>
   );
 }
