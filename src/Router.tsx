@@ -1,13 +1,9 @@
-import { createHashRouter, RouterProvider } from 'react-router-dom';
+import { createHashRouter} from 'react-router-dom';
 import { HomePage } from './pages/Home.page';
 
-const router = createHashRouter([
+export const router = createHashRouter([
   {
     path: '/',
     element: <HomePage />,
   },
 ]);
-
-export function Router() {
-  return <RouterProvider router={router} />;
-}
