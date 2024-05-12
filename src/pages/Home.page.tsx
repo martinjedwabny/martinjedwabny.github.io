@@ -1,7 +1,6 @@
 import { FloatingNav } from "@/components/FloatingNav/FloatingNav";
 import HeroSection from "@/components/HeroSection/HeroSection";
-import githubIcon from "@/images/github.svg";
-import linkedinIcon from "@/images/linkedin.svg";
+import { links } from "@/utils/links";
 
 const navItems = [
   {
@@ -18,28 +17,15 @@ const navItems = [
   }
 ];
 
-const navIcons = [
-  {
-    name: "Github",
-    iconPath: githubIcon,
-    href: "https://github.com/martinjedwabny"
-  },
-  {
-    name: "LinkedIn",
-    iconPath: linkedinIcon,
-    href: "https://www.linkedin.com/in/martinjedwabny/"
-  }
-];
-
 export function HomePage() {
   return (
-    <>
+    <main>
       <FloatingNav
         navItems={navItems}
-        navIcons={navIcons}
+        navIcons={[links[0], links[1]]}
       />
       <HeroSection />
       <div className="h-[200vh]"></div>
-    </>
+    </main>
   );
 }

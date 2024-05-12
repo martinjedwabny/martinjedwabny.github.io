@@ -54,7 +54,7 @@ export const HeroHighlight = ({
                 }}
             />
 
-            <div className={cn("relative z-20", className)}>{children}</div>
+            <div className={cn("flex relative z-20 items-center", className)}>{children}</div>
         </div>
     );
 };

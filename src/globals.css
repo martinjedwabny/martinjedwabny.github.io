@@ -6,4 +6,11 @@
     .dark {
         @apply bg-gray-900;
     }
+
+    .default-text-gradient {
+        background: -webkit-linear-gradient(0turn, var(--emerald-400), var(--green-600));
+        -webkit-background-clip: text;
+        -webkit-text-fill-color: transparent;
+        background-clip: text;
+    }
 }
