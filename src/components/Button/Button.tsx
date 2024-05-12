@@ -1,8 +1,10 @@
+import { cn } from "@/utils/cn";
 import { motion } from "framer-motion";
 
 export default function Button({
     children,
     onClick,
+    className
 }: React.PropsWithChildren<
     React.ButtonHTMLAttributes<HTMLButtonElement>
 >) {
@@ -10,7 +12,7 @@ export default function Button({
         <motion.button
             onClick={onClick}
             whileHover={{ scale: 1.05 }}
-            className="bg-slate-800 no-underline group cursor-pointer relative shadow-2xl shadow-gray-900 rounded-full p-px text-xs sm:text-sm leading-6  text-white inline-block"
+            className={cn("bg-slate-800 no-underline group cursor-pointer relative shadow-2xl shadow-gray-900 rounded-full p-px text-xs sm:text-sm leading-6  text-white inline-block", className)}
         >
             <span className="absolute inset-0 overflow-hidden rounded-full">
                 <span className="absolute inset-0 rounded-full bg-[image:radial-gradient(75%_100%_at_50%_0%,rgba(56,189,248,0.6)_0%,rgba(56,189,248,0)_75%)]" />

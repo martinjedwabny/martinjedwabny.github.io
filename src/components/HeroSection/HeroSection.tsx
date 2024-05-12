@@ -18,7 +18,7 @@ export default function HeroSection() {
     return (
         < HeroHighlight className="flex flex-col" >
 
-            <div className="flex flex-col max-w-2xl items-center">
+            <div className="flex flex-col max-w-2xl items-center max-sm:mt-16">
 
                 <div className="flex flex-row justify-center -ml-6">
 
@@ -58,11 +58,12 @@ export default function HeroSection() {
                     {messages.intro[2]}
                 </p>
 
-                <div className="flex flex-row gap-2 justify-center">
+                <div className="flex flex-row gap-2 justify-center max-sm:w-[280px] max-sm:inline-block text-center">
                     {links.map((link, index) => (
                         <Button
                             key={index}
                             onClick={() => window.open(link.href)}
+                            className="mb-4 mx-1"
                         >
                             <img
                                 src={link.iconPath}

@@ -16,13 +16,13 @@ export const links = [
         href: "https://www.linkedin.com/in/martinjedwabny/"
     },
     {
-        name: "Resume",
-        iconPath: resumeIcon,
-        href: "https://docs.google.com/document/d/1C5-69SqbxNRaloBMXi2XdJ4kK8vG7XdcI4JLcMdYo5Q/edit?usp=sharing"
-    },
-    {
         name: "martinjedwabny@gmail.com",
         iconPath: mailIcon,
         href: "mailto:martinjedwabny@gmail.com"
+    },
+    {
+        name: "Resume",
+        iconPath: resumeIcon,
+        href: "https://docs.google.com/document/d/1C5-69SqbxNRaloBMXi2XdJ4kK8vG7XdcI4JLcMdYo5Q/edit?usp=sharing"
     }
 ];
