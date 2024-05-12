@@ -1,5 +1,6 @@
 import { FloatingNav } from "@/components/FloatingNav/FloatingNav";
 import HeroSection from "@/components/HeroSection/HeroSection";
+import { Pointer3d } from "@/components/Pointer3d/Pointer3d";
 import { links } from "@/utils/links";
 
 const navItems = [
