@@ -1,3 +1,4 @@
+import { ExperienceSection } from "@/components/ExperienceSection/ExperienceSection";
 import { FloatingNav } from "@/components/FloatingNav/FloatingNav";
 import HeroSection from "@/components/HeroSection/HeroSection";
 import { Pointer3d } from "@/components/Pointer3d/Pointer3d";
@@ -26,7 +27,7 @@ export function HomePage() {
         navIcons={[links[0], links[1]]}
       />
       <HeroSection />
-      <div className="h-[200vh]"></div>
+      <ExperienceSection />
     </main>
   );
 }
