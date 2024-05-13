@@ -1,4 +1,4 @@
-import React, { useEffect, useRef, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import {
     motion,
     useTransform,
@@ -20,7 +20,7 @@ export const Timeline = ({
     const ref = useRef<HTMLDivElement>(null);
     const { scrollYProgress } = useScroll({
         target: ref,
-        offset: ["start center", "end end"],
+        offset: ["start start", "end end"],
     });
 
     const contentRef = useRef<HTMLDivElement>(null);
@@ -61,7 +61,7 @@ export const Timeline = ({
                     viewBox={`0 0 20 ${svgHeight}`}
                     width="20"
                     height={svgHeight} // Set the SVG height
-                    className=" ml-4 block"
+                    className="block"
                     aria-hidden="true"
                 >
                     <motion.path

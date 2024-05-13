@@ -17,4 +17,9 @@
     p {
         @apply text-white;
     }
+
+    h2 {
+        @apply text-3xl;
+        @apply text-white;
+    }
 }

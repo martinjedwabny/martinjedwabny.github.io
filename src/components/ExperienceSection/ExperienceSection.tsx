@@ -2,12 +2,17 @@ import { Timeline } from "@/components/Timeline/Timeline";
 
 export function ExperienceSection() {
     return (
-        <Timeline
-            className="px-6"
-            items={dummyContent.map((content) => ({
-                title: content.title,
-            }))}
-        />
+        <section className="px-8 flex flex-col max-w-2xl mx-auto">
+            <h2>
+                Work Experience
+            </h2>
+            <Timeline
+                className="pt-6"
+                items={dummyContent.map((content) => ({
+                    title: content.title,
+                }))}
+            />
+        </section>
     );
 }
 
