@@ -10,8 +10,6 @@ import { useRef } from "react";
 export function HomePage() {
   const experienceRef = useRef<HTMLDivElement>(null);
   const educationRef = useRef<HTMLDivElement>(null);
-  const yExp = experienceRef.current?.getBoundingClientRect().top! - 100;
-  const yEdu = educationRef.current?.getBoundingClientRect().top! - 100;
   const navItems = [
     {
       name: "Home",
@@ -19,11 +17,11 @@ export function HomePage() {
     },
     {
       name: "Experience",
-      onClick: () => window.scrollTo({ top: yExp, behavior: 'smooth' }),
+      onClick: () => window.scrollTo({ top: experienceRef.current?.offsetTop! - 100, behavior: 'smooth' }),
     },
     {
       name: "Education",
-      onClick: () => window.scrollTo({ top: yEdu, behavior: 'smooth' }),
+      onClick: () => window.scrollTo({ top: educationRef.current?.offsetTop! - 100, behavior: 'smooth' }),
     }
   ];
   return (
