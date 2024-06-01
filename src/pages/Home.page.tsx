@@ -1,6 +1,7 @@
 import { ExperienceSection } from "@/components/ExperienceSection/ExperienceSection";
 import { FloatingNav } from "@/components/FloatingNav/FloatingNav";
 import HeroSection from "@/components/HeroSection/HeroSection";
+import { ResearchSection } from "@/components/ResearchSection/ResearchSection";
 import { links } from "@/utils/links";
 
 const navItems = [
@@ -27,6 +28,7 @@ export function HomePage() {
       />
       <HeroSection />
       <ExperienceSection />
+      <ResearchSection />
     </main>
   );
 }
