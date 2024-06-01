@@ -23,6 +23,6 @@ export const links = [
     {
         name: "Resume",
         iconPath: resumeIcon,
-        href: "https://docs.google.com/document/d/1C5-69SqbxNRaloBMXi2XdJ4kK8vG7XdcI4JLcMdYo5Q/edit?usp=sharing"
+        href: "https://docs.google.com/document/d/1bUf9G2uGdWbCKxnI7ibYJteUeol8--l_8bjc5CmIOlM/edit?usp=sharing"
     }
 ];

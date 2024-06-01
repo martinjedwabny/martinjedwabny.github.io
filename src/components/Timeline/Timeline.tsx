@@ -4,15 +4,16 @@ import {
     useTransform,
     useScroll,
     useSpring,
-    MotionValue,
     useMotionValueEvent,
 } from "framer-motion";
 import { cn } from "@/utils/cn";
 
 export const Timeline = ({
+    id,
     items,
     className,
 }: {
+    id: string,
     items: React.ReactNode[];
     className?: string;
 }) => {
@@ -75,7 +76,7 @@ export const Timeline = ({
                     <motion.path
                         d={`M 1 0V -36 l 18 24 V ${svgHeight * 0.8} 24V ${svgHeight}`}
                         fill="none"
-                        stroke="url(#gradient)"
+                        stroke={`url(#gradient${id})`}
                         strokeWidth="1.25"
                         className="motion-reduce:hidden"
                         transition={{
@@ -84,7 +85,7 @@ export const Timeline = ({
                     ></motion.path>
                     <defs>
                         <motion.linearGradient
-                            id="gradient"
+                            id={`gradient${id}`}
                             gradientUnits="userSpaceOnUse"
                             x1="0"
                             x2="0"

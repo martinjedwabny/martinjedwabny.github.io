@@ -1,34 +1,25 @@
 import { Timeline } from "@/components/Timeline/Timeline";
-import TimelineCard from "../TimelineCard/TimelineCard";
+import TimelineCard, { TimelineItem } from "../TimelineCard/TimelineCard";
 import SectionTitle from "../SectionTitle/SectionTitle";
 import iconSrc from "@/images/work.svg";
 
-export type ExperienceSectionItem = {
-    title: string;
-    company: string;
-    place: string;
-    startDate: string;
-    endDate: string;
-    description: string[];
-};
-
-const items: ExperienceSectionItem[] = [
+const items: TimelineItem[] = [
     {
         title: "Software Developer (Full-stack)",
-        company: "Anabasis Assets",
+        entity: "Anabasis Assets",
         place: "France",
         startDate: "Aug 2023",
         endDate: "Present",
         description: [
             "Led the front-end development team of Karnyx, the company's flagship online database exploration, editing, and querying solution, mentoring 1 junior developer and 2 interns in expanding their Typescript and React skillsets.",
-            "Developed a Monaco-based code editor and language server for the company’s proprietary database language.",
+            "Developed a Monaco-based code editor and language server for the company's proprietary database language.",
             "Implemented back-end services with Kotlin for real-time file editing and notifications via WebSockets.",
-            "Managed the front-end team’s Gitlab board to keep on track with deadlines, using Docker for fast CI/CD iteration."
+            "Managed the front-end team's Gitlab board to keep on track with deadlines, using Docker for fast CI/CD iteration."
         ]
     },
     {
         title: "Ph.D. Researcher - Computer Science (AI)",
-        company: "University of Montpellier",
+        entity: "University of Montpellier",
         place: "France",
         startDate: "Oct 2019",
         endDate: "Dec 2022",
@@ -41,7 +32,7 @@ const items: ExperienceSectionItem[] = [
     },
     {
         title: "Software Developer (Full-stack)",
-        company: "Dubbing.digital",
+        entity: "Dubbing.digital",
         place: "Argentina",
         startDate: "Jan 2018",
         endDate: "Jan 2019",
@@ -53,7 +44,7 @@ const items: ExperienceSectionItem[] = [
     },
     {
         title: "Software Developer Intern (Front/Mobile)",
-        company: "Despegar.com",
+        entity: "Despegar.com",
         place: "Argentina",
         startDate: "Oct 2013",
         endDate: "Nov 2014",
@@ -67,13 +58,14 @@ const items: ExperienceSectionItem[] = [
 
 export function ExperienceSection() {
     return (
-        <section className="px-4 md:px-10 flex flex-col max-w-2xl mx-auto">
+        <section className="px-4 md:px-10 flex flex-col max-w-2xl mx-auto pb-16">
             <SectionTitle
                 title="Experience"
                 icon={iconSrc}
                 className="md:pt-10 pb-4 max-sm:justify-center"
             />
             <Timeline
+                id="experience-timeline"
                 items={items.map((item) => (
                     <TimelineCard
                         item={item}

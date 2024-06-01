@@ -1,14 +1,21 @@
-import { ExperienceSectionItem } from "../ExperienceSection/ExperienceSection";
+export type TimelineItem = {
+    title: string;
+    entity: string;
+    place: string;
+    startDate: string;
+    endDate: string;
+    description: string[];
+};
 
 type TimelineCardProps = {
-    item: ExperienceSectionItem;
+    item: TimelineItem;
 };
 
 export default function TimelineCard({ item }: TimelineCardProps) {
     const {
         title,
         description,
-        company,
+        entity,
         place,
         startDate,
         endDate,
@@ -18,10 +25,10 @@ export default function TimelineCard({ item }: TimelineCardProps) {
             <h5 className="default-text-gradient mb-2 text-2xl font-bold tracking-tight text-gray-900 dark:text-white">
                 {title}
             </h5>
-            {/* Company and place (left) + dates (right) */}
+            {/* entity and place (left) + dates (right) */}
             <div className="flex flex-col md:flex-row justify-between text-gray-600 dark:text-gray-400 pb-4">
                 <p className="italic">
-                    {company} - {place}
+                    {entity} - {place}
                 </p>
                 <p className="italic">
                     {startDate} - {endDate}

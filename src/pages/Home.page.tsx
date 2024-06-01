@@ -1,8 +1,10 @@
 import { ExperienceSection } from "@/components/ExperienceSection/ExperienceSection";
 import { FloatingNav } from "@/components/FloatingNav/FloatingNav";
 import HeroSection from "@/components/HeroSection/HeroSection";
-import { ResearchSection } from "@/components/ResearchSection/ResearchSection";
+import { EducationSection } from "@/components/EducationSection/EducationSection";
 import { links } from "@/utils/links";
+import { AboutSection } from "@/components/AboutSection/AboutSection";
+import GoTop from "@/components/GoTop/GoTop";
 
 const navItems = [
   {
@@ -14,7 +16,7 @@ const navItems = [
     onClick: () => { },
   },
   {
-    name: "Research",
+    name: "Education",
     onClick: () => { },
   }
 ];
@@ -28,7 +30,9 @@ export function HomePage() {
       />
       <HeroSection />
       <ExperienceSection />
-      <ResearchSection />
+      <EducationSection />
+      <AboutSection />
+      <GoTop />
     </main>
   );
 }
