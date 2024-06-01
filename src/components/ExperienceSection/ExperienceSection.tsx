@@ -1,95 +1,85 @@
 import { Timeline } from "@/components/Timeline/Timeline";
+import TimelineCard from "../TimelineCard/TimelineCard";
+import SectionTitle from "../SectionTitle/SectionTitle";
+import iconSrc from "@/images/work.svg";
+
+export type ExperienceSectionItem = {
+    title: string;
+    company: string;
+    place: string;
+    startDate: string;
+    endDate: string;
+    description: string[];
+};
+
+const items: ExperienceSectionItem[] = [
+    {
+        title: "Software Developer (Full-stack)",
+        company: "Anabasis Assets",
+        place: "France",
+        startDate: "Aug 2023",
+        endDate: "Present",
+        description: [
+            "Led the front-end development team of Karnyx, the company's flagship online database exploration, editing, and querying solution, mentoring 1 junior developer and 2 interns in expanding their Typescript and React skillsets.",
+            "Developed a Monaco-based code editor and language server for the company’s proprietary database language.",
+            "Implemented back-end services with Kotlin for real-time file editing and notifications via WebSockets.",
+            "Managed the front-end team’s Gitlab board to keep on track with deadlines, using Docker for fast CI/CD iteration."
+        ]
+    },
+    {
+        title: "Ph.D. Researcher - Computer Science (AI)",
+        company: "University of Montpellier",
+        place: "France",
+        startDate: "Oct 2019",
+        endDate: "Dec 2022",
+        description: [
+            "Specialized in Ethical AI, developed theory and algorithms to ensure automated agents align with human values.",
+            "Developed an AI planning-based model to compare plans based on their ethical nuances.",
+            "Applied machine learning techniques to infer human preferences and discern ethical nuances between actions.",
+            "Published 3 papers as the main author in international conferences, in addition to the Ph.D. thesis."
+        ]
+    },
+    {
+        title: "Software Developer (Full-stack)",
+        company: "Dubbing.digital",
+        place: "Argentina",
+        startDate: "Jan 2018",
+        endDate: "Jan 2019",
+        description: [
+            "Developed a web application for Dubbing.digital, a SaaS startup in the dubbing industry as a Full-stack engineer.",
+            "Spearheaded the front-end development of its website for job postings using Javascript and React.",
+            "Integrated CouchDB/NoSQL back-end services to save postings, and generate Excel billing statements for clients."
+        ]
+    },
+    {
+        title: "Software Developer Intern (Front/Mobile)",
+        company: "Despegar.com",
+        place: "Argentina",
+        startDate: "Oct 2013",
+        endDate: "Nov 2014",
+        description: [
+            "Developed the iOS app of Despegar.com, latin-america's leading online travel agency, within a 10-person team.",
+            "Implemented a touristic package selling feature, facilitating thousands of transactions daily.",
+            "Addressed production bugs and enhancements using Trello/Kanban and Jenkins for CI/CD pipelines."
+        ]
+    },
+];
 
 export function ExperienceSection() {
     return (
-        <section className="px-8 flex flex-col max-w-2xl mx-auto">
-            <h2>
-                Work Experience
-            </h2>
+        <section className="px-4 md:px-10 flex flex-col max-w-2xl mx-auto">
+            <SectionTitle
+                title="Experience"
+                icon={iconSrc}
+                className="md:pt-10 pb-4 max-sm:justify-center"
+            />
             <Timeline
-                className="pt-6"
-                items={dummyContent.map((content) => ({
-                    title: content.title,
-                }))}
+                items={items.map((item) => (
+                    <TimelineCard
+                        item={item}
+                    />
+                ))}
             />
         </section>
     );
 }
-
-const dummyContent = [
-    {
-        title: "Lorem Ipsum Dolor Sit Amet",
-        description: (
-            <>
-                <p>
-                    Sit duis est minim proident non nisi velit non consectetur. Esse
-                    adipisicing laboris consectetur enim ipsum reprehenderit eu deserunt
-                    Lorem ut aliqua anim do. Duis cupidatat qui irure cupidatat incididunt
-                    incididunt enim magna id est qui sunt fugiat. Laboris do duis pariatur
-                    fugiat Lorem aute sit ullamco. Qui deserunt non reprehenderit dolore
-                    nisi velit exercitation Lorem qui do enim culpa. Aliqua eiusmod in
-                    occaecat reprehenderit laborum nostrud fugiat voluptate do Lorem culpa
-                    officia sint labore. Tempor consectetur excepteur ut fugiat veniam
-                    commodo et labore dolore commodo pariatur.
-                </p>
-                <p>
-                    Dolor minim irure ut Lorem proident. Ipsum do pariatur est ad ad
-                    veniam in commodo id reprehenderit adipisicing. Proident duis
-                    exercitation ad quis ex cupidatat cupidatat occaecat adipisicing.
-                </p>
-                <p>
-                    Tempor quis dolor veniam quis dolor. Sit reprehenderit eiusmod
-                    reprehenderit deserunt amet laborum consequat adipisicing officia qui
-                    irure id sint adipisicing. Adipisicing fugiat aliqua nulla nostrud.
-                    Amet culpa officia aliquip deserunt veniam deserunt officia
-                    adipisicing aliquip proident officia sunt.
-                </p>
-            </>
-        ),
-        badge: "React",
-        image:
-            "https://images.unsplash.com/photo-1464822759023-fed622ff2c3b?auto=format&fit=crop&q=80&w=3540&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D",
-    },
-    {
-        title: "Lorem Ipsum Dolor Sit Amet",
-        description: (
-            <>
-                <p>
-                    Ex irure dolore veniam ex velit non aute nisi labore ipsum occaecat
-                    deserunt cupidatat aute. Enim cillum dolor et nulla sunt exercitation
-                    non voluptate qui aliquip esse tempor. Ullamco ut sunt consectetur
-                    sint qui qui do do qui do. Labore laborum culpa magna reprehenderit ea
-                    velit id esse adipisicing deserunt amet dolore. Ipsum occaecat veniam
-                    commodo proident aliqua id ad deserunt dolor aliquip duis veniam sunt.
-                </p>
-                <p>
-                    In dolore veniam excepteur eu est et sunt velit. Ipsum sint esse
-                    veniam fugiat esse qui sint ad sunt reprehenderit do qui proident
-                    reprehenderit. Laborum exercitation aliqua reprehenderit ea sint
-                    cillum ut mollit.
-                </p>
-            </>
-        ),
-        badge: "Changelog",
-        image:
-            "https://images.unsplash.com/photo-1519681393784-d120267933ba?auto=format&fit=crop&q=80&w=3540&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D",
-    },
-    {
-        title: "Lorem Ipsum Dolor Sit Amet",
-        description: (
-            <>
-                <p>
-                    Ex irure dolore veniam ex velit non aute nisi labore ipsum occaecat
-                    deserunt cupidatat aute. Enim cillum dolor et nulla sunt exercitation
-                    non voluptate qui aliquip esse tempor. Ullamco ut sunt consectetur
-                    sint qui qui do do qui do. Labore laborum culpa magna reprehenderit ea
-                    velit id esse adipisicing deserunt amet dolore. Ipsum occaecat veniam
-                    commodo proident aliqua id ad deserunt dolor aliquip duis veniam sunt.
-                </p>
-            </>
-        ),
-        badge: "Launch Week",
-        image:
-            "https://images.unsplash.com/photo-1469474968028-56623f02e42e?auto=format&fit=crop&q=80&w=3506&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D",
-    },
-];

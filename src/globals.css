@@ -21,5 +21,6 @@
     h2 {
         @apply text-3xl;
         @apply text-white;
+        @apply font-medium;
     }
 }

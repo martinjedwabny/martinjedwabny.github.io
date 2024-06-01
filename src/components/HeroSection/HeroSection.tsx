@@ -3,7 +3,6 @@ import { HeroHighlight, Highlight } from "../HeroHighlight/HeroHighlight";
 import avatarSrc from "@/images/avat.png";
 import Button from "../Button/Button";
 import { links } from "@/utils/links";
-import { Pointer3d } from "../Pointer3d/Pointer3d";
 
 const messages = {
     title: "Hey there, I'm ",
@@ -17,8 +16,8 @@ const messages = {
 
 export default function HeroSection() {
     return (
-        < HeroHighlight className="flex flex-col pt-32 md:pt-40 pb-8 md:pb-16" >
-            <div className="flex flex-col max-w-2xl items-center">
+        < HeroHighlight className="flex flex-col md:pt-40 md:pb-16 h-screen md:h-[36rem]" >
+            <div className="flex flex-col max-w-2xl items-center my-auto ">
                 <div className="flex flex-row justify-center -ml-6">
 
                     <img
@@ -74,7 +73,6 @@ export default function HeroSection() {
                     ))}
                 </div>
             </div>
-            <Pointer3d className="!h-48 !w-48 mx-auto md:mt-8" />
         </HeroHighlight>
     );
 }

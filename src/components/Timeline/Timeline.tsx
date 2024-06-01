@@ -5,6 +5,7 @@ import {
     useScroll,
     useSpring,
     MotionValue,
+    useMotionValueEvent,
 } from "framer-motion";
 import { cn } from "@/utils/cn";
 
@@ -12,15 +13,13 @@ export const Timeline = ({
     items,
     className,
 }: {
-    items: {
-        title: string
-    }[];
+    items: React.ReactNode[];
     className?: string;
 }) => {
     const ref = useRef<HTMLDivElement>(null);
     const { scrollYProgress } = useScroll({
         target: ref,
-        offset: ["start start", "end end"],
+        offset: ["start center", "end end"],
     });
 
     const contentRef = useRef<HTMLDivElement>(null);
@@ -33,14 +32,14 @@ export const Timeline = ({
     }, []);
 
     const y1 = useSpring(
-        useTransform(scrollYProgress, [0, 0.8], [50, svgHeight]),
+        useTransform(scrollYProgress, [0, 0.8], [0, svgHeight]),
         {
             stiffness: 500,
             damping: 90,
         }
     );
     const y2 = useSpring(
-        useTransform(scrollYProgress, [0, 1], [50, svgHeight - 200]),
+        useTransform(scrollYProgress, [0, 1], [0, svgHeight - 200]),
         {
             stiffness: 500,
             damping: 90,
@@ -56,7 +55,7 @@ export const Timeline = ({
             ref={ref}
             className={cn("relative w-full max-w-4xl mx-auto h-full flex flex-row", className)}
         >
-            <div className="mt-5">
+            <div className="mt-5 max-md:ml-[-10px]">
                 <svg
                     viewBox={`0 0 20 ${svgHeight}`}
                     width="20"
@@ -100,13 +99,13 @@ export const Timeline = ({
                     </defs>
                 </svg>
             </div>
-            <div ref={contentRef}>
+            <div ref={contentRef} className="flex-auto">
                 {items.map((item, index) => (
-                    <div className="h-96 flex flex-row gap-4">
-                        <TimelineDot scrollYProgress={scrollYProgress} />
-                        <p>
-                            {item.title}
-                        </p>
+                    <div className="flex flex-row">
+                        <TimelineDot className="my-12 flex-[0_0_auto]" />
+                        <div className="py-4 pl-4 flex-auto">
+                            {item}
+                        </div>
                     </div>
                 ))}
             </div>
@@ -114,18 +113,26 @@ export const Timeline = ({
     );
 };
 
-function TimelineDot({ scrollYProgress }: { scrollYProgress: MotionValue<number> }) {
+function TimelineDot({ className }: { className?: string }) {
+    const ref = useRef<HTMLDivElement>(null);
+    const { scrollY } = useScroll()
+    const elementY = ref.current?.offsetTop ?? 9999;
+    const [activated, setActivated] = useState<boolean>(false);
+    useMotionValueEvent(scrollY, "change", (latest) => {
+        setActivated(latest > elementY);
+    })
     return <motion.div
+        ref={ref}
         transition={{
             duration: 0.2,
             delay: 0.5,
         }}
         animate={{
-            boxShadow: scrollYProgress.get() > 0
+            boxShadow: !activated
                 ? "none"
                 : "rgba(0, 0, 0, 0.24) 0px 3px 8px",
         }}
-        className="h-4 w-4 rounded-full border border-neutral-200 shadow-sm flex items-center justify-center -ml-[9px] z-20 mt-2"
+        className={cn("h-4 w-4 rounded-full border border-neutral-200 shadow-sm flex items-center justify-center -ml-[9px] z-20 mt-2", className)}
     >
         <motion.div
             transition={{
@@ -133,13 +140,9 @@ function TimelineDot({ scrollYProgress }: { scrollYProgress: MotionValue<number>
                 delay: 0.5,
             }}
             animate={{
-                backgroundColor: scrollYProgress.get() > 0 ? "white" : "var(--emerald-500)",
-                borderColor: scrollYProgress.get() > 0 ? "white" : "var(--emerald-600)",
+                backgroundColor: !activated ? "white" : "var(--emerald-500)",
+                borderColor: !activated ? "white" : "var(--emerald-600)",
             }}
             className="h-2 w-2  rounded-full border border-neutral-300 bg-white" />
     </motion.div>;
 }
-
-// margin - left: -9px;
-// z - index: 20;
-// margin - top: 8px;

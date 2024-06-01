@@ -11,7 +11,7 @@ export default function Button({
     return (
         <motion.button
             onClick={onClick}
-            whileHover={{ scale: 1.05 }}
+            whileHover={{ scale: 1.10 }}
             className={cn("bg-slate-800 no-underline group cursor-pointer relative shadow-2xl shadow-gray-900 rounded-full p-px text-xs sm:text-sm leading-6  text-white inline-block", className)}
         >
             <span className="absolute inset-0 overflow-hidden rounded-full">
