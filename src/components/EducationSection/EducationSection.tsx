@@ -19,8 +19,8 @@ const items: TimelineItem[] = [
         title: "M.Sc. in Computer Science",
         entity: "University of Buenos Aires",
         place: "Argentina",
-        startDate: "Mar 2016",
-        endDate: "Dec 2018",
+        startDate: "Mar 2013",
+        endDate: "Jul 2019",
         description: [
             "Coursework: Algorithms and Data Structures, Probability and Statistics, Data Science, Game Theory, Programming Language paradigms, and Algebra.",
             "GPA: 9.47 on a 0-10 scale.",
